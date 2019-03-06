@@ -1,0 +1,7 @@
+<view class="hosp_detail">
+  <view class="row">
+    <view class="label">医院名称</view>
+    <view class="data"></view>
+  </view>
+  <button class='no-button hosp-delete' bindtap="deleteHosp">删除</button>
+</view>

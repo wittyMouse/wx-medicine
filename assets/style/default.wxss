@@ -1,0 +1,8 @@
+page {
+    --bgColor: #f5f5f5;
+    --colorOne: #666;
+    --colorTwo: #F7EFD2;
+    --fontSizeOne: 30rpx;
+    --fontSizeTwo: 34rpx;
+    --linkColor: rgb(70, 145, 214);
+}

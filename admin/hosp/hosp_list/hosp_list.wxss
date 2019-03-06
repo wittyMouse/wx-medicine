@@ -1,0 +1,13 @@
+.hosp-add {
+  position: fixed;
+  left: 315rpx;
+  bottom: 30rpx;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  font-size: 60rpx;
+  color: #666;
+  line-height: 100rpx;
+  box-shadow: 0rpx 5rpx 20rpx rgba(0, 0, 0, .1);
+  background-color: rgba(255, 255, 255, .5);
+}

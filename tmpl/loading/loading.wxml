@@ -1,0 +1,8 @@
+<template name="loading">
+  <view class="loading">
+      <view class="container">
+        <image class="img" src="../../assets/images/loading.gif" />
+        <view class="txt">页面加载中...</view>
+      </view>
+  </view>
+</template>

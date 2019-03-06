@@ -1,0 +1,10 @@
+<import src="/tmpl/admin-list/admin-list.wxml" />
+
+<view class="hosp_list">
+  <view class="search-bar">
+    <view class="location"></view>
+    <view class="search"></view>
+  </view>
+  <template is="hosp-list" data="{{hospList}}" />
+  <button class="no-button hosp-add">+</button>
+</view>

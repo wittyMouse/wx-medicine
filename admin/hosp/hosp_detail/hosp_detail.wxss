@@ -1,0 +1,12 @@
+.row {
+
+}
+
+.row .label {
+  display: inline-block;
+}
+
+.row .data {
+  display: inline-block;
+}
+

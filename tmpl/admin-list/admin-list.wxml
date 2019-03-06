@@ -1,0 +1,10 @@
+<template name="hosp-list">
+  <view class="hosp-list">
+    <block wx:for="{{hospList}}" wx:key="index">
+      <navigator class="hosp-item" url="/admin/hosp/hosp_detail/hosp_detail?id={{item.hospital_id}}">
+        <image class="hosp-logo" mode="" src="{{item.hospital_logo}}" />
+        <view class="hosp-name">{{item.hospital_name}}</view>
+      </navigator>
+    </block>
+  </view>
+</template>
