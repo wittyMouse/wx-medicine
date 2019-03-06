@@ -145,10 +145,11 @@ const rGeocoder = (pos, that, app) => {
   }).catch(error => console.error(error));
 }
 
-const login = () => {
+const login = (app, cb) => {
   wx.login({
     success(res) {
       if (res.code) {
+        // console.log(res.code);
         request({
           url: API.login,
           data: {
@@ -156,6 +157,8 @@ const login = () => {
           }
         }).then(res => {
           console.log(res);
+          app.globalData.token = res.data.token;
+          cb && cb();
         }).catch(error => {
           console.error(error);
         });
