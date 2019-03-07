@@ -158,10 +158,8 @@ const login = (app, cb) => {
         }).then(res => {
           console.log(res);
           app.globalData.token = res.data.token;
-          cb && cb();
-        }).catch(error => {
-          console.error(error);
-        });
+          cb && cb(app);
+        }).catch(error => console.error(error));
       } else {
         wx.showToast({
           title: '登录错误，请检查网络连接',
@@ -172,6 +170,21 @@ const login = (app, cb) => {
   });
 }
 
+const get_userinfo = (app) => {
+  request({
+    url: API.get_userinfo,
+    data: {
+      token: app.globalData.token
+    },
+    method: "post"
+  }).then(res => {
+    console.log(res);
+    if (res.data.status == 0) {
+      app.globalData.userInfo = res.data.data;
+    }
+  }).catch(error => console.error(error));
+}
+
 module.exports = {
   formatTime,
   rpxToPx,
@@ -179,5 +192,6 @@ module.exports = {
   getLocationAuth,
   getLocation,
   login,
-  request
+  request,
+  get_userinfo
 }

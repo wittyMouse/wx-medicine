@@ -63,5 +63,14 @@ Page({
         wx.navigateTo({
             url: this.data.list[i].url
         });
+    },
+    onLoad(options) {
+        if (app.globalData.userInfo) {
+            this.setData({
+                isLogin: true,
+                avatarUrl: app.globalData.userInfo.avatarUrl,
+                nickName: app.globalData.userInfo.nickName
+            })
+        }
     }
 })

@@ -1,4 +1,4 @@
-import { login } from './utils/util';
+import { login, get_userinfo } from './utils/util';
 
 App({
     onLaunch() {
@@ -9,7 +9,7 @@ App({
             this.globalData.location.localCity = localCity;
         }
         if (!this.globalData.token) {
-            login(this);
+            login(this, get_userinfo);
         }
     },
     globalData: {
