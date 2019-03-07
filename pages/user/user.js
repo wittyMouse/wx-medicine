@@ -1,3 +1,6 @@
+import { API } from '../../utils/api';
+import { request } from '../../utils/request';
+import { login } from '../../utils/util';
 const app = getApp();
 
 Page({
@@ -11,19 +14,48 @@ Page({
         ]
     },
     getUserInfo(e) {
-        console.log(e)
+        let that = this;
+        let data = e.detail;
+        wx.checkSession({
+            success() {
+                that.set_userinfo(data);
+            },
+            fail() {
+                login(app, () => {
+                    that.set_userinfo(data);
+                });
+            }
+        })
+    },
+    set_userinfo(data) {
         wx.showLoading({
             title: '登陆中...',
             mask: true,
         });
-        if (e.detail.errMsg == 'getUserInfo:ok') {
-            app.globalData.userInfo = e.detail.userInfo;
-            this.setData({
-                isLogin: true,
-                avatarUrl: e.detail.userInfo.avatarUrl,
-                nickName: e.detail.userInfo.nickName
-            });
-            wx.hideLoading();
+        if (data.errMsg == 'getUserInfo:ok') {
+            data.token = app.globalData.token;
+            request({
+                url: API.set_userinfo,
+                method: 'post',
+                data
+            }).then(res => {
+                console.log(res);
+                if(res.data.status == 0) {
+                    app.globalData.userInfo = data.userInfo;
+                    this.setData({
+                        isLogin: true,
+                        avatarUrl: data.userInfo.avatarUrl,
+                        nickName: data.userInfo.nickName
+                    });
+                    wx.hideLoading();
+                } else {
+                    wx.hideLoading();
+                    wx.showToast({
+                        title: '登录失败，请检查网络连接',
+                        icon: 'none'
+                    });
+                }
+            }).catch(error => console.error(error));
         }
     },
     jump(e) {
