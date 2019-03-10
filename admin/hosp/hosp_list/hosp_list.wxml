@@ -6,5 +6,5 @@
     <view class="search"></view>
   </view>
   <template is="hosp-list" data="{{hospList}}" />
-  <button class="no-button hosp-add">+</button>
+  <button class="no-button hosp-add" data-tag="add" bindtap="jump">+</button>
 </view>

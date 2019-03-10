@@ -1,12 +1,73 @@
-.row {
-
+.hosp_detail .row {
+  background-color: #fff;
 }
 
-.row .label {
-  display: inline-block;
+.hosp_detail .row .col {
+  margin: 0 30rpx;
+  border-bottom: 1px solid var(--borderColorOne);
 }
 
-.row .data {
-  display: inline-block;
+.hosp_detail .row .col.between {
+  justify-content: space-between;
 }
 
+.hosp_detail .row .col .label {
+  margin-right: 30rpx;
+  padding: 40rpx 0;
+  line-height: 1;
+}
+
+.hosp_detail .row .col .data {
+  color: var(--colorOne);
+  text-align: right;
+  line-height: 1;
+}
+
+.hosp_detail .row .col .data .image {
+  width: 140rpx;
+  height: 140rpx;
+  margin: 20rpx 0;
+  background-color: #000;
+}
+
+.hosp_detail .row .col .icon-enter {
+  margin-left: 10rpx;
+  color: var(--colorOne);
+}
+
+.hosp_detail.add .row {
+  background-color: #f5f5f5;
+}
+
+.hosp_detail.add .row .col {
+  border-bottom: 1px solid var(--borderColorTwo);
+}
+
+.hosp_detail.add .row .col.n-b {
+  border-bottom: 0;
+}
+
+.hosp_detail.add .row .col .icon-camera {
+  width: 140rpx;
+  height: 140rpx;
+  margin: 20rpx 0;
+  color: #fff;
+  text-align: center;
+  line-height: 140rpx;
+  background-color: #ccc;
+}
+
+.hosp_detail.add .row .col .textarea {
+  height: 250rpx;
+  margin: 40rpx 0;
+}
+
+.hosp_detail.add .hosp-add {
+  height: 100rpx;
+  border-radius: 100rpx;
+  margin: 0 30rpx;
+  color: #fff;
+  text-align: center;
+  line-height: 100rpx;
+  background-color: var(--backgroundColorOne);
+}

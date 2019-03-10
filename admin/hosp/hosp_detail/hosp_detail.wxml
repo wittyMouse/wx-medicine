@@ -1,7 +1,74 @@
-<view class="hosp_detail">
-  <view class="row">
-    <view class="label">医院名称</view>
-    <view class="data"></view>
-  </view>
-  <button class='no-button hosp-delete' bindtap="deleteHosp">删除</button>
+<view class="hosp_detail {{tag?'add':''}}">
+  <block wx:if="{{tag}}">
+    <view class="row">
+      <label class="col flex flex-y-center between">
+        <view class="label flex-0">医院图标</view>
+        <view class="iconfont icon-camera" bindtap="uploadImage"></view>
+      </label>
+    </view>
+    <view class="row">
+      <label class="col flex flex-y-center">
+        <view class="label flex-0">医院名称</view>
+        <input class="input flex-1" placeholder="请输入医院名称" data-name="hospitalName" bindinput="input" />
+      </label>
+    </view>
+    <view class="row">
+      <label class="col flex flex-y-center">
+        <view class="label flex-0">联系方式</view>
+        <input class="input flex-1" placeholder="请输入医院联系方式" data-name="contacts" bindinput="input" />
+      </label>
+    </view>
+    <view class="row">
+      <label class="col flex flex-y-center">
+        <view class="label flex-0">医院地址</view>
+        <input class="input flex-1" placeholder="请输入医院地址" data-name="address" bindinput="input" />
+      </label>
+    </view>
+    <view class="row">
+      <label class="col flex n-b">
+        <view class="label flex-0">医院简介</view>
+        <textarea class="textarea flex-1" placeholder="请输入医院简介" data-name="introduction" bindinput="input"></textarea>
+      </label>
+    </view>
+    <button class='no-button hosp-add' bindtap="addHosp">添加</button>
+  </block>
+  <block wx:else>
+    <view class="row">
+      <view class="flex flex-y-center col between">
+        <view class="flex-0 label">医院图标</view>
+        <view class="flex-1 data">
+          <image class="image" />
+        </view>
+        <view class="flex-0 iconfont icon-enter"></view>
+      </view>
+    </view>
+    <view class="row">
+      <view class="flex flex-y-center col">
+        <view class="flex-0 label">医院名称</view>
+        <view class="flex-1 data"></view>
+        <view class="flex-0 iconfont icon-enter"></view>
+      </view>
+    </view>
+    <view class="row">
+      <view class="flex flex-y-center col">
+        <view class="flex-0 label">联系方式</view>
+        <view class="flex-1 data"></view>
+        <view class="flex-0 iconfont icon-enter"></view>
+      </view>
+    </view>
+    <view class="row">
+      <view class="flex flex-y-center col">
+        <view class="flex-0 label">医院地址</view>
+        <view class="flex-1 data"></view>
+        <view class="flex-0 iconfont icon-enter"></view>
+      </view>
+    </view>
+    <view class="row">
+      <view class="flex flex-y-center col">
+        <view class="flex-0 label">医院简介</view>
+        <view class="flex-1 data"></view>
+        <view class="flex-0 iconfont icon-enter"></view>
+      </view>
+    </view>
+  </block>
 </view>

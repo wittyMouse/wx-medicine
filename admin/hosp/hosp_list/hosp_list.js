@@ -13,6 +13,12 @@ Page({
     ]
   },
 
+  jump(e) {
+    wx.navigateTo({
+      url: '/admin/hosp/hosp_detail/hosp_detail?tag=' + e.currentTarget.dataset.tag
+    });
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */

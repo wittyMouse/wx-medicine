@@ -6,6 +6,10 @@
 
 page {
     background-color: var(--bgColor);
+    --borderColorOne: #f5f5f5;
+    --borderColorTwo: #ddd;
+    --backgroundColorOne: royalblue;
+    --colorOne: #aaa;
 }
 
 .flex {
@@ -48,23 +52,22 @@ page {
 
 .no-button {
     /* position: unset; */
-    /* display: unset; */
-    margin-left: unset;
-    margin-right: unset;
-    padding-left: unset;
-    padding-right: unset;
-    /* box-sizing: unset; */
-    font-size: unset;
-    text-align: unset;
+    display: block;
+    margin: inherit;
+    padding: inherit;
+    box-sizing: inherit;
+    font-size: inherit;
+    text-align: inherit;
     /* text-decoration: unset; */
-    line-height: unset;
-    border-radius: unset;
+    line-height: inherit;
+    border-radius: inherit;
     /* -webkit-tap-highlight-color: unset; */
-    /* overflow: unset; */
-    color: unset;
-    background-color: unset;
+    overflow: inherit;
+    color: inherit;
+    background-color: inherit;
 }
 
 .no-button::after {
-    border: unset;
+    border: 0;
 }
+
