@@ -19,6 +19,20 @@ function request(params) {
   });
 }
 
+function uploadFile(params) {
+  return new Promise((resolve, reject) => {
+    wx.uploadFile({
+      ...params,
+      success(res) {
+        resolve(res);
+      },
+      fail(error) {
+        reject(error);
+      }
+    });
+  })
+}
+
 function show(params) {
   params.url += '/' + params.data.id;
   delete params.data;
@@ -34,6 +48,7 @@ function destroy(params) {
 
 module.exports = {
   request,
+  uploadFile,
   show,
   destroy
 }
