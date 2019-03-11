@@ -1,5 +1,6 @@
 import { API } from '../../../utils/api';
 const RESTful = require('../../../utils/request');
+const app = getApp();
 
 Page({
 
@@ -106,6 +107,64 @@ Page({
     }
   },
 
+  showPop() {
+    this.setData({
+      show_pop: true
+    });
+  },
+
+  hidePop() {
+    this.setData({
+      show_pop: false
+    });
+  },
+
+  stopTouch() {
+    return;
+  },
+
+  /**
+   * 选择图片
+   */
+  chooseImage() {
+    let that = this;
+    that.hidePop();
+    wx.chooseImage({
+      count: 1,
+      success(res) {
+        that.setData({
+          hospitalLogo: res.tempFiles[0].path,
+          logoSize: res.tempFiles[0].size
+        });
+      }
+    });
+  },
+
+  /**
+   * 选择区域
+   */
+  chooseRegion() {
+    wx.navigateTo({
+      url: '/pages/region/region?id=1&time=1'
+    });
+  },
+
+  /**
+   * 选择地址
+   */
+  chooseLocation() {
+    let that = this;
+    wx.chooseLocation({
+      success(res) {
+        that.setData({
+          address: res.address,
+          latitude: res.latitude,
+          longitude: res.longitude
+        });
+      }
+    });
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -144,7 +203,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    if (app.globalData.region) {
+      this.setData({
+        region: app.globalData.region
+      });
+      app.globalData.region = "";
+    }
   },
 
   /**
