@@ -9,7 +9,8 @@
     "pages/favorite/favorite",
     "pages/hosp/hosp",
     "pages/wallet/wallet",
-    "pages/put/put"
+    "pages/put/put",
+    "pages/test/test"
   ],
   "subpackages": [
     {

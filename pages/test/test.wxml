@@ -1,0 +1,5 @@
+<view class="test">
+    <button bindtap="chooseImage">选择图片</button>
+    <image class="" src="{{}}"></image>
+    <button bindtap="upload">上传</button>
+</view>
