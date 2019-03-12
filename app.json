@@ -18,6 +18,7 @@
       "root": "admin",
       "pages": [
         "index/index",
+        "update/update",
         "hosp/hosp_list/hosp_list",
         "hosp/hosp_detail/hosp_detail"
       ]

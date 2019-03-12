@@ -20,10 +20,19 @@ function request(params) {
 }
 
 function uploadFile(params) {
+  if (params.header) {
+    if (!params.header['content-type']) {
+      params.header['content-type'] = 'multipart/form-data';
+    }
+  } else {
+    params.header = { 'content-type': 'multipart/form-data' }
+  }
+  params.name = "file";
   return new Promise((resolve, reject) => {
     wx.uploadFile({
       ...params,
       success(res) {
+        res.data = JSON.parse(res.data);
         resolve(res);
       },
       fail(error) {

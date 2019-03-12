@@ -8,7 +8,7 @@ Page({
      */
     chooseRegion(e) {
         let { id, name } = e.currentTarget.dataset;
-        let region = this.options.region ? this.options.region + name : name;
+        let region = this.options.region ? this.options.region + ' ' + name : name;
         if (this.getRegionList(id).length > 0) {
             wx.navigateTo({
                 url: `/pages/region/region?id=${id}&time=${parseInt(this.options.time) + 1}&region=${region}`

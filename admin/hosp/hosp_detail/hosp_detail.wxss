@@ -27,7 +27,6 @@
   width: 140rpx;
   height: 140rpx;
   margin: 20rpx 0;
-  background-color: #000;
 }
 
 .hosp_detail .row .col .icon-enter {
@@ -79,6 +78,19 @@
   text-align: center;
   line-height: 100rpx;
   background-color: var(--backgroundColorOne);
+}
+
+.hosp_detail .hosp-delete {
+  position: fixed;
+  left: 30rpx;
+  bottom: 0rpx;
+  width: 690rpx;
+  height: 100rpx;
+  border-radius: 100rpx;
+  color: #fff;
+  text-align: center;
+  line-height: 100rpx;
+  background-color: rgb(240, 0, 0);
 }
 
 .pop-up {

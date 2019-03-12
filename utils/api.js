@@ -15,6 +15,12 @@ const API = {
     
     // 医院
     hosp: HOST + "/hospital",
+
+    // 获取医院列表
+    hosp_list: HOST + "/hosp_list",
+
+    // 上传文件
+    upload: HOST + "/common/upload"
 };
 
 module.exports = {

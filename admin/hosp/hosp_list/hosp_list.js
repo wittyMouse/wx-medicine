@@ -1,9 +1,14 @@
+import { API } from '../../../utils/api';
+const RESTful = require('../../../utils/request');
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    p: 1,
+    page_size: 10,
     hospList: [
       {
         hospital_id: '1',
@@ -20,10 +25,29 @@ Page({
   },
 
   /**
+   * 获取医院列表
+   */
+  getHospList() {
+    RESTful.request({
+      url: API.hosp_list,
+      // data: {
+
+      // }
+    }).then(res =>{
+      console.log(res);
+      if (res.data.status == 0) {
+        this.setData({
+          hospList: res.data.data
+        });
+      }
+    }).catch(error => console.error(error));
+  },
+
+  /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+
   },
 
   /**
@@ -37,7 +61,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    this.getHospList();    
   },
 
   /**
