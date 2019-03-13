@@ -46,41 +46,41 @@ Page({
   /**
    * 删除医院
    */
-  deleteHosp() {
-    let that = this;
-    wx.showModal({
-      title: '提示',
-      content: '是否删除该医院？',
-      success(res) {
-        if (res.confirm) {
-          RESTful.destroy({
-            url: API.hosp,
-            data: {
-              id: that.options.id
-            }
-          }).then(res => {
-            if (res.data.status == 0) {
-              wx.showToast({
-                title: res.data.msg,
-                complete() {
-                  let id = setTimeout(() => {
-                    wx.navigateBack();
-                    clearTimeout(id);
-                  }, 1500);
-                }
-              });
-            } else {
-              wx.showToast({
-                title: res.data.msg
-              });
-            }
-          }).catch(error => {
-            console.error(error);
-          });
-        }
-      }
-    })
-  },
+  // deleteHosp() {
+  //   let that = this;
+  //   wx.showModal({
+  //     title: '提示',
+  //     content: '是否删除该医院？',
+  //     success(res) {
+  //       if (res.confirm) {
+  //         RESTful.destroy({
+  //           url: API.hosp,
+  //           data: {
+  //             id: that.options.id
+  //           }
+  //         }).then(res => {
+  //           if (res.data.status == 0) {
+  //             wx.showToast({
+  //               title: res.data.msg,
+  //               complete() {
+  //                 let id = setTimeout(() => {
+  //                   wx.navigateBack();
+  //                   clearTimeout(id);
+  //                 }, 1500);
+  //               }
+  //             });
+  //           } else {
+  //             wx.showToast({
+  //               title: res.data.msg
+  //             });
+  //           }
+  //         }).catch(error => {
+  //           console.error(error);
+  //         });
+  //       }
+  //     }
+  //   })
+  // },
 
   /**
    * 更新医院图标
@@ -97,10 +97,20 @@ Page({
         method: 'put'
       }).then(res => {
         console.log(res)
-        this.setData({
-          'hospDetail.hospital_logo': this.params.hospitalLogo
-        });
         wx.hideLoading();
+        if (res.data.status == 0) {
+          this.setData({
+            'hospDetail.hospital_logo': this.params.hospitalLogo
+          });
+          wx.showToast({
+            title: res.data.msg
+          });
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none'
+          });
+        }
       }).catch(error => console.error(error));
     })
   },
@@ -110,9 +120,9 @@ Page({
    * @param {*} e 
    */
   updateHosp(e) {
-    let { tag, name } = e.currentTarget.dataset;
+    let { label, name, value } = e.currentTarget.dataset;
     wx.navigateTo({
-      url: `/admin/update/update?id=${this.options.id}&tag=${tag}&name=${name}`
+      url: `/admin/update/update?tag=hosp&id=${this.options.id}&label=${label}&name=${name}&value=${value}`
     });
   },
 
@@ -152,6 +162,13 @@ Page({
   },
 
   /**
+   * 阻止掩膜滑动
+   */
+  stopTouch() {
+    return;
+  },
+
+  /**
    * 显示弹窗
    */
   showPop() {
@@ -170,10 +187,21 @@ Page({
   },
 
   /**
-   * 阻止掩膜滑动
+   * 输入图片地址
    */
-  stopTouch() {
-    return;
+  inputImage() {
+    this.setData({
+      input_image: true
+    });
+  },
+
+  /**
+   * 关闭图片地址输入
+   */
+  closeInputImage() {
+    this.setData({
+      input_image: false
+    });
   },
 
   /**
@@ -311,7 +339,7 @@ Page({
     RESTful.uploadFile({
       url: API.upload,
       filePath: this.data.hospitalLogo,
-      formData: { fileSize: this.data.logoSize }
+      formData: { fileSize: this.data.logoSize ? this.data.logoSize : '' }
     }).then(res => {
       if (res.data.status == 1) {
         this.params.hospitalLogo = res.data.data.url;
@@ -329,16 +357,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if (options.id) {
-      this.getHospDetail();
-    } else {
-      wx.setNavigationBarTitle({
-        title: '添加医院'
-      });
-      this.setData({
-        tag: true
-      });
-    }
+
   },
 
   /**
@@ -352,6 +371,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    if (this.options.id) {
+      this.getHospDetail();
+    } else {
+      wx.setNavigationBarTitle({
+        title: '添加医院'
+      });
+      this.setData({
+        tag: true
+      });
+    }
     if (app.globalData.region) {
       this.params.region = app.globalData.region;
       this.setData({

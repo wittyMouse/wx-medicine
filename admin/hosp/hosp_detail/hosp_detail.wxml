@@ -3,11 +3,22 @@
     <view class="row">
       <label class="col flex flex-y-center between">
         <view class="label flex-1">医院图标</view>
-        <block wx:if="{{hospitalLogo}}">
-          <image class="flex-0 image" src="{{hospitalLogo}}" bindtap="showPop" />
+        <block wx:if="{{input_image}}">
+          <input class="input flex-1" placeholder="请输入图片地址" data-name="hospitalLogo" bindinput="input" />
+          <!-- <block wx:if="{{}}">
+            <view class="flex-0 iconfont icon-right_fill" bindtap="closeInputImage"></view>
+          </block>
+          <block wx:else>
+              <view class="flex-0 iconfont icon-error" bindtap="closeInputImage"></view>
+          </block> -->
         </block>
-        <block wx:else>
-          <view class="flex-0 iconfont icon-camera" bindtap="showPop"></view>
+        <block>
+          <block wx:if="{{hospitalLogo}}">
+            <image class="flex-0 image" src="{{hospitalLogo}}" bindtap="showPop" />
+          </block>
+          <block wx:else>
+            <view class="flex-0 iconfont icon-camera" bindtap="showPop"></view>
+          </block>
         </block>
       </label>
     </view>
@@ -33,8 +44,9 @@
     <view class="row">
       <label class="col flex flex-y-center">
         <view class="label flex-0">详细地址</view>
-        <input class="input flex-1" value="{{address}}" placeholder="请输入医院地址" data-name="address" bindinput="input" bindblur="blur" />
-        <view class="flex-0 iconfont icon-location" catchtap="chooseLocation"></view>      
+        <input class="input flex-1" value="{{address}}" placeholder="请输入医院地址" data-name="address" bindinput="input"
+          bindblur="blur" />
+        <view class="flex-0 iconfont icon-location" catchtap="chooseLocation"></view>
       </label>
     </view>
     <view class="row">
@@ -54,42 +66,44 @@
         </view>
       </view>
     </view>
-    <view class="row" data-tag="hosp" data-name="hospitalName" bindtap="updateHosp">
+    <view class="row" data-label="医院名称" data-name="hospitalName" data-value="{{hospDetail.hospital_name}}"
+      bindtap="updateHosp">
       <view class="flex flex-y-center col">
         <view class="flex-0 label">医院名称</view>
         <view class="flex-1 data">{{hospDetail.hospital_name}}</view>
         <view class="flex-0 iconfont icon-enter"></view>
       </view>
     </view>
-    <view class="row" data-tag="hosp" data-name="contacts" bindtap="updateHosp">
+    <view class="row" data-label="联系方式" data-name="contacts" data-value="{{hospDetail.contacts}}" bindtap="updateHosp">
       <view class="flex flex-y-center col">
         <view class="flex-0 label">联系方式</view>
         <view class="flex-1 data">{{hospDetail.contacts}}</view>
         <view class="flex-0 iconfont icon-enter"></view>
       </view>
     </view>
-    <view class="row" data-tag="hosp" data-name="address" bindtap="updateHosp">
+    <view class="row" data-label="医院地址" data-name="address" data-value="{{hospDetail.address}}" bindtap="updateHosp">
       <view class="flex flex-y-center col">
         <view class="flex-0 label">医院地址</view>
         <view class="flex-1 data">{{hospDetail.address}}</view>
         <view class="flex-0 iconfont icon-enter"></view>
       </view>
     </view>
-    <view class="row" data-tag="hosp" data-name="introduction" bindtap="updateHosp">
+    <view class="row" data-label="医院简介" data-name="introduction" data-value="{{hospDetail.introduction}}"
+      bindtap="updateHosp">
       <view class="flex flex-y-center col">
         <view class="flex-0 label">医院简介</view>
         <view class="flex-1 data">{{hospDetail.introduction}}</view>
         <view class="flex-0 iconfont icon-enter"></view>
       </view>
     </view>
-    <button class='no-button hosp-delete' bindtap="deleteHosp">删除</button>
+    <!-- <button class='no-button hosp-delete' bindtap="deleteHosp">删除</button> -->
   </block>
 
   <view class="pop-up {{show_pop?'':'hidden'}}">
     <view class="mask" catchtouchmove="stopTouch" catchtap="hidePop"></view>
     <view class="menu">
+      <view class="menu-item" bindtap="inputImage">输入图片地址</view>
       <view class="menu-item" bindtap="chooseImage">选择/拍摄图片</view>
-      <view class="menu-item" bindtap="input1">输入图片地址</view>
     </view>
   </view>
 </view>

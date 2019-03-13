@@ -1,5 +1,5 @@
 .hosp-list {
-
+  
 }
 
 .hosp-item {
@@ -12,10 +12,13 @@
   height: 100rpx;
   border-radius: 50%;
   margin-right: 30rpx;
-  vertical-align: middle;
 }
 
 .hosp-name {
-  display: inline-block;
-  vertical-align: middle;
+}
+
+.hosp-item .icon-icon_selected_fill,
+.hosp-item .icon-icon_selected_no {
+  margin-right: 30rpx;
+  color: var(--backgroundColorOne);
 }

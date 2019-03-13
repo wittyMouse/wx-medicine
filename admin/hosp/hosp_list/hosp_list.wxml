@@ -5,6 +5,14 @@
     <view class="location"></view>
     <view class="search"></view>
   </view>
-  <template is="hosp-list" data="{{hospList}}" />
-  <button class="no-button hosp-add" data-tag="add" bindtap="jump">+</button>
+  <template is="hosp-list" data="{{hospList, edit}}" />
+  <view class="flex flex-y-center button-row">
+    <block wx:if="{{edit}}">
+      <button class="no-button iconfont icon-delete" catchtap="deleteHosp"></button>
+    </block>
+    <block wx:else>
+      <button class="no-button iconfont icon-add" data-url="/admin/hosp/hosp_detail/hosp_detail" data-tag="add" catchtap="jump"></button>
+    </block>
+    <button class="no-button iconfont icon-edit" catchtap="editHosp"></button>
+  </view>
 </view>

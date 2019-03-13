@@ -1,3 +1,13 @@
 <view class="update">
-
+    <view class="flex flex-y-center row old-data">
+        <view class="flex-0 label">{{label}}</view>
+        <view class="flex-1 data">{{value}}</view>
+    </view>
+    <view class="flex flex-y-center row new-data">
+        <input class="flex-1 input" value="{{keyword}}" placeholder="请输入新的{{label}}" focus bindinput="input" bindblur="blur" />
+        <block wx:if="{{name=='address'}}">
+            <view class="flex-0 iconfont icon-location" catchtap="chooseLocation"></view>          
+        </block>
+    </view>
+    <button class="no-button confirm" bindtap="confirm">确认</button>
 </view>

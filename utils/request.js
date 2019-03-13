@@ -48,6 +48,13 @@ function show(params) {
   return request(params);
 }
 
+function update(params) {
+  params.url += '/' + params.data.id;
+  delete params.data.id;
+  params.method = 'PUT';
+  return request(params);
+}
+
 function destroy(params) {
   params.url += '/' + params.data.id;
   delete params.data;
@@ -59,5 +66,6 @@ module.exports = {
   request,
   uploadFile,
   show,
+  update,
   destroy
 }

@@ -1,7 +1,13 @@
 import { uploadFile } from "../../utils/request";
 
 Page({
-  data: {},
+  data: {
+    cardData: {
+      title: '弹窗',
+      cancel: '取消',
+      confirm: '确定'
+    }
+  },
   chooseImage(e) {
     let that = this;
     wx.chooseImage({
@@ -35,5 +41,27 @@ Page({
         icon: "none"
       });
     }
-  }
+  },
+
+  /**
+   * 卡片输入
+   * @param {*} e 
+   */
+  cardInput(e) {
+
+  },
+
+  /**
+   * 卡片按钮点击事件
+   * @param {*} e 
+   */
+  cardTap(e) {
+    let { tag } = e.currentTarget.dataset;
+    if (tag == 'confirm') {
+
+    }
+    this.setData({
+      show_pop: false
+    });
+  },
 });

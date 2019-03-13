@@ -19,6 +19,9 @@ const API = {
     // 获取医院列表
     hosp_list: HOST + "/hosp_list",
 
+    // 批量删除医院
+    hosp_delete: HOST + "/hosp_delete",
+
     // 上传文件
     upload: HOST + "/common/upload"
 };

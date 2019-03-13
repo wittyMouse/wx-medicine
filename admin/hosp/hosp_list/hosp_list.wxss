@@ -1,13 +1,31 @@
-.hosp-add {
+.button-row {
   position: fixed;
-  left: 315rpx;
+  left: 275rpx;
   bottom: 30rpx;
-  width: 100rpx;
+  z-index: 10;
+  width: 200rpx;
   height: 100rpx;
-  border-radius: 50%;
-  font-size: 60rpx;
-  color: #666;
-  line-height: 100rpx;
+  border-radius: 100rpx;
   box-shadow: 0rpx 5rpx 20rpx rgba(0, 0, 0, .1);
   background-color: rgba(255, 255, 255, .5);
+}
+
+.button-row .icon-add,
+.button-row .icon-delete,
+.button-row .icon-edit {
+  width: 100rpx;
+  height: 100rpx;
+  font-size: 45rpx;
+  color: #666;
+  text-align: center;
+  line-height: 100rpx;
+}
+
+.button-row .icon-add,
+.button-row .icon-delete {
+  border-radius: 100rpx 0 0 100rpx;
+}
+
+.button-row .icon-edit {
+  border-radius: 0 100rpx 100rpx 0;
 }
