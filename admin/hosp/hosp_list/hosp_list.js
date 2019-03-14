@@ -1,5 +1,6 @@
 import { API } from '../../../utils/api';
 const RESTful = require('../../../utils/request');
+const app = getApp();
 
 Page({
 
@@ -7,20 +8,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-    p: 1,
-    page_size: 10,
-    edit: !1
+    loading: true,
+    edit: false,
+    // showBottomBtn: true
   },
   selectedList: [],
+  // scrollTop: 0,
 
   /**
    * 跳转
    * @param {*} e 
    */
   jump(e) {
-    let dataset = e.currentTarget.dataset;
-    let url = "";
-    for(let i in dataset) {
+    let url = "",
+      dataset = e.currentTarget.dataset;
+    for (let i in dataset) {
       if (i == 'i') {
         continue;
       }
@@ -42,13 +44,32 @@ Page({
   },
 
   /**
+   * 编辑医院
+   */
+  editHosp() {
+    if (!this.data.noData) {
+      let data = {};
+      if (this.data.edit && this.selectedList.length > 0) {
+        let hospList = this.data.hospList;
+        this.selectedList.map(value => {
+          hospList[value.i].selected = false;
+        });
+        data.hospList = hospList;
+        this.selectedList = [];
+      }
+      data.edit = !this.data.edit;
+      this.setData(data);
+    }
+  },
+
+  /**
    * 选择医院
    * @param {*} e 
    */
   selectHosp(e) {
     let { i, id } = e.currentTarget.dataset;
     if (this.data.hospList[i].selected) {
-      for(let i = 0; i < this.selectedList.length; i++) {
+      for (let i = 0; i < this.selectedList.length; i++) {
         if (this.selectedList[i].id == id) {
           this.selectedList.splice(i, 1);
           break;
@@ -59,24 +80,6 @@ Page({
     }
     this.setData({
       [`hospList[${i}].selected`]: this.data.hospList[i].selected ? false : true,
-    });
-  },
-
-  /**
-   * 编辑医院
-   * @param {*} e 
-   */
-  editHosp(e) {
-    let hospList = this.data.hospList;
-    if (this.data.edit && this.selectedList.length > 0) {
-      this.selectedList.map(value => {
-        hospList[value.i].selected = false;
-      });
-      this.selectedList = [];
-    }
-    this.setData({
-      hospList,
-      edit: !this.data.edit
     });
   },
 
@@ -112,13 +115,18 @@ Page({
             }).then(res => {
               wx.hideLoading();
               if (res.data.status == 0) {
-                let hospList = that.data.hospList;
-                that.selectedList.map(value => {
-                  hospList.splice(value.i, 1);
-                });
+                // let hospList = that.data.hospList;
+                // that.selectedList.map(value => {
+                //   hospList.splice(value.i, 1);
+                // });
+                // that.selectedList = [];
+                // that.setData({
+                //   hospList,
+                //   edit: false
+                // });
                 that.selectedList = [];
+                that.getHospList();
                 that.setData({
-                  hospList,
                   edit: false
                 });
                 wx.showToast({
@@ -146,19 +154,76 @@ Page({
 
   /**
    * 获取医院列表
+   * @param {*} t 
    */
-  getHospList() {
+  getHospList(t = 1) {
+    let p = 1;
+    if (t) {
+      this.setData({
+        loading: true
+      });
+    }
     RESTful.request({
       url: API.hosp_list,
-      // data: {
-
-      // }
-    }).then(res =>{
-      console.log(res);
+      data: {
+        p,
+        page_size: 10
+      }
+    }).then(res => {
+      // console.log(res);
+      let data = {};
+      if (t) {
+        data.loading = false;
+      } else {
+        wx.stopPullDownRefresh();
+      }
       if (res.data.status == 0) {
-        this.setData({
-          hospList: res.data.data
-        });
+        let newArr = res.data.data;
+        if (newArr.length > 0) {
+          if (this.data.noData) {
+            data.noData = false;
+          }
+          if (this.data.noMoreData) {
+            data.noMoreData = false;
+          }
+          data.hospList = newArr;
+        } else {
+          data.noData = true;
+        }
+        data.p = 1;
+        this.setData(data);
+      }
+    }).catch(error => console.error(error));
+  },
+
+  /**
+   * 获取更多医院列表
+   */
+  getMoreHospList() {
+    let p = this.data.p + 1;
+    this.setData({
+      loadMore: true
+    });
+    RESTful.request({
+      url: API.hosp_list,
+      data: {
+        p,
+        page_size: 10
+      }
+    }).then(res => {
+      // console.log(res);
+      let data = {
+        loadMore: false
+      };
+      if (res.data.status == 0) {
+        let newArr = res.data.data;
+        if (newArr.length > 0) {
+          data.hospList = this.data.hospList.concat(newArr);
+          data.p = p;
+        } else {
+          data.noMoreData = true;
+        }
+        this.setData(data);
       }
     }).catch(error => console.error(error));
   },
@@ -167,55 +232,84 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getHospList();
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getHospList();        
+    if (app.globalData.hospInit) {
+      app.globalData.hospInit = false;
+      this.getHospList();
+    }
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    
+    if (this.data.edit) {
+      this.editHosp();
+    }
+    this.getHospList(0);
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    
+    if (!(this.data.noData || this.data.noMoreData || this.data.edit)) {
+      this.getMoreHospList();
+    }
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    
-  }
+
+  },
+
+  /**
+   * 页面滑动事件
+   */
+  // onPageScroll(e) {
+  //   if (e.scrollTop > this.scrollTop + 10) {
+  //     if (this.data.showBottomBtn) {
+  //       this.setData({
+  //         showBottomBtn: false
+  //       });
+  //     }
+  //     this.scrollTop = e.scrollTop;
+  //   } else if (e.scrollTop < this.scrollTop) {
+  //     if (!this.data.showBottomBtn) {
+  //       this.setData({
+  //         showBottomBtn: true
+  //       });
+  //     }
+  //     this.scrollTop = e.scrollTop;
+  //   }
+  // }
 })

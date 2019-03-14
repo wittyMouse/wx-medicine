@@ -1,18 +1,33 @@
+<import src="/tmpl/loading/loading.wxml" />
 <import src="/tmpl/admin-list/admin-list.wxml" />
+<import src="/tmpl/no-more-data/no-more-data.wxml" />
+<import src="/tmpl/no-data/no-data.wxml" />
 
-<view class="hosp_list">
-  <view class="search-bar">
-    <view class="location"></view>
-    <view class="search"></view>
-  </view>
-  <template is="hosp-list" data="{{hospList, edit}}" />
-  <view class="flex flex-y-center button-row">
-    <block wx:if="{{edit}}">
-      <button class="no-button iconfont icon-delete" catchtap="deleteHosp"></button>
+<block wx:if="{{loading}}">
+  <template is="loading"></template>
+</block>
+<block wx:else>
+  <view class="hosp_list">
+    <block wx:if="{{noData}}">
+      <template is="no-data"></template>
     </block>
-    <block wx:else>
-      <button class="no-button iconfont icon-add" data-url="/admin/hosp/hosp_detail/hosp_detail" data-tag="add" catchtap="jump"></button>
+    <block>
+      <search-bar ></search-bar>
+      <template is="hosp-list" data="{{hospList, edit}}"></template>
+      <block wx:if="{{loadMore||noMoreData}}">
+        <template is="no-more-data" data="{{loadMore}}"></template>
+      </block>
     </block>
-    <button class="no-button iconfont icon-edit" catchtap="editHosp"></button>
+
+    <view class="flex flex-y-center button-row">
+      <block wx:if="{{edit}}">
+        <button class="no-button iconfont icon-delete" catchtap="deleteHosp"></button>
+      </block>
+      <block wx:else>
+        <button class="no-button iconfont icon-add" data-url="/admin/hosp/hosp_detail/hosp_detail" data-tag="add"
+          catchtap="jump"></button>
+      </block>
+      <button class="no-button iconfont icon-edit" catchtap="editHosp"></button>
+    </view>
   </view>
-</view>
+</block>

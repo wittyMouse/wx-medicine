@@ -1,5 +1,6 @@
 import { API } from '../../utils/api';
 const RESTful = require('../../utils/request');
+const app = getApp();
 
 Page({
   data: {
@@ -49,6 +50,8 @@ Page({
       console.log(res);
       wx.hideLoading();
       if (res.data.status == 0) {
+        app.globalData[`${this.options.tag}Init`] = true;
+        app.globalData[`${this.options.tag}Update`] = true;
         wx.showToast({
           title: res.data.msg,
           complete() {

@@ -1,7 +1,7 @@
 <template name="hosp-list">
   <view class="hosp-list">
     <block wx:for="{{hospList}}" wx:key="index">
-      <view class="flex flex-y-center hosp-item" data-url="/admin/hosp/hosp_detail/hosp_detail" data-id="{{item.hospital_id}}" data-i="{{index}}" bindtap="{{edit?'selectHosp':'jump'}}">
+      <view class="flex flex-y-center hosp-item" data-url="/admin/hosp/hosp_detail/hosp_detail" data-id="{{item.hospitalId}}" data-i="{{index}}" bindtap="{{edit?'selectHosp':'jump'}}">
         <block wx:if="{{edit}}">
           <block wx:if="{{item.selected}}">
             <view class="flex-0 iconfont icon-icon_selected_fill"></view>
@@ -10,8 +10,8 @@
             <view class="flex-0 iconfont icon-icon_selected_no"></view>
           </block>
         </block>
-        <image class="flex-0 hosp-logo" mode="" src="{{item.hospital_logo}}" />
-        <view class="flex-1 hosp-name">{{item.hospital_name}}</view>
+        <image class="flex-0 hosp-logo" mode="" src="{{item.hospitalLogo}}" />
+        <view class="flex-1 hosp-name">{{item.hospitalName}}</view>
       </view>
     </block>
   </view>

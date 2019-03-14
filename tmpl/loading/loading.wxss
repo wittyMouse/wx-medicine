@@ -8,23 +8,13 @@
     background-color: #fff;
 }
 
-.loading .container {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    transform: translate3d(0, -60%, 0);
+.loading .img {
+    width: 120rpx;
+    height: 90rpx;
 }
 
-.loading .container .img {
-    display: block;
-    width: 160rpx;
-    height: 120rpx;
-    margin: 0 auto 10rpx;
-}
-
-.loading .container .txt {
+.loading .txt {
+    padding-right: 40rpx;
     font-size: 32rpx;
     color: #000;
-    text-align: center;
 }

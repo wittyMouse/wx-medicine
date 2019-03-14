@@ -2,13 +2,19 @@
   position: fixed;
   left: 275rpx;
   bottom: 30rpx;
-  z-index: 10;
+  z-index: 101;
   width: 200rpx;
   height: 100rpx;
   border-radius: 100rpx;
   box-shadow: 0rpx 5rpx 20rpx rgba(0, 0, 0, .1);
   background-color: rgba(255, 255, 255, .5);
+  /* transition: all 300ms ease 0s; */
 }
+
+/* .button-row.hidden {
+  bottom: -9999rpx;
+  opacity: 0;
+} */
 
 .button-row .icon-add,
 .button-row .icon-delete,

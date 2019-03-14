@@ -19,6 +19,7 @@
       "pages": [
         "index/index",
         "update/update",
+        "search/search",
         "hosp/hosp_list/hosp_list",
         "hosp/hosp_detail/hosp_detail"
       ]
