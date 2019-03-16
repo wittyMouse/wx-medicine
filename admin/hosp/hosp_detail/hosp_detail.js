@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    
   },
   params: {},
 
@@ -101,7 +101,7 @@ Page({
         data: this.params,
         method: 'put'
       }).then(res => {
-        console.log(res)
+        // console.log(res)
         wx.hideLoading();
         if (res.data.status == 0) {
           this.setData({

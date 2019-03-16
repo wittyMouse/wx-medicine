@@ -47,7 +47,7 @@ Page({
       url,
       data: this.params
     }).then(res => {
-      console.log(res);
+      // console.log(res);
       wx.hideLoading();
       if (res.data.status == 0) {
         app.globalData[`${this.options.tag}Init`] = true;

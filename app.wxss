@@ -5,6 +5,8 @@
 @import "./tmpl/admin-list/admin-list.wxss";
 @import "./tmpl/no-more-data/no-more-data.wxss";
 @import "./tmpl/no-data/no-data.wxss";
+@import "./tmpl/bottom-button/bottom-button.wxss";
+@import "./tmpl/input-bar/input-bar.wxss";
 
 page {
     background-color: var(--bgColor);
@@ -72,4 +74,3 @@ page {
 .no-button::after {
     border: 0;
 }
-

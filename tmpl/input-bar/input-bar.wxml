@@ -1,0 +1,8 @@
+<template name="input-bar">
+    <view class="input-bar">
+        <label class="col flex flex-y-center">
+            <view class="label flex-0">{{label}}</view>
+            <input class="input flex-1" placeholder="{{placeholder}}" data-name="hospitalName" bindinput="input" />
+        </label>
+    </view>
+</template>

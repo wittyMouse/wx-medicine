@@ -39,7 +39,7 @@ Page({
                 method: 'post',
                 data
             }).then(res => {
-                console.log(res);
+                // console.log(res);
                 if(res.data.status == 0) {
                     app.globalData.userInfo = data.userInfo;
                     this.setData({

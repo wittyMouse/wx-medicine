@@ -10,10 +10,9 @@ Page({
   data: {
     loading: true,
     edit: false,
-    // showBottomBtn: true
+    navUrl: '/admin/hosp/hosp_detail/hosp_detail'
   },
   selectedList: [],
-  // scrollTop: 0,
 
   /**
    * 跳转
@@ -46,7 +45,7 @@ Page({
   /**
    * 编辑医院
    */
-  editHosp() {
+  editEvent() {
     if (!this.data.noData) {
       let data = {};
       if (this.data.edit && this.selectedList.length > 0) {
@@ -86,7 +85,7 @@ Page({
   /**
    * 删除医院
    */
-  deleteHosp() {
+  deleteEvent() {
     let that = this;
     if (that.selectedList.length > 0) {
       wx.showModal({
@@ -115,15 +114,6 @@ Page({
             }).then(res => {
               wx.hideLoading();
               if (res.data.status == 0) {
-                // let hospList = that.data.hospList;
-                // that.selectedList.map(value => {
-                //   hospList.splice(value.i, 1);
-                // });
-                // that.selectedList = [];
-                // that.setData({
-                //   hospList,
-                //   edit: false
-                // });
                 that.selectedList = [];
                 that.getHospList();
                 that.setData({
@@ -229,6 +219,15 @@ Page({
   },
 
   /**
+   * 点击搜索框
+   */
+  enterSearch() {
+    wx.navigateTo({
+      url: '/admin/search/search?tag=hosp'
+    });
+  },
+
+  /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
@@ -290,26 +289,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-
-  /**
-   * 页面滑动事件
-   */
-  // onPageScroll(e) {
-  //   if (e.scrollTop > this.scrollTop + 10) {
-  //     if (this.data.showBottomBtn) {
-  //       this.setData({
-  //         showBottomBtn: false
-  //       });
-  //     }
-  //     this.scrollTop = e.scrollTop;
-  //   } else if (e.scrollTop < this.scrollTop) {
-  //     if (!this.data.showBottomBtn) {
-  //       this.setData({
-  //         showBottomBtn: true
-  //       });
-  //     }
-  //     this.scrollTop = e.scrollTop;
-  //   }
-  // }
+  }
 })

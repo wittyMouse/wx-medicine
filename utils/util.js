@@ -156,7 +156,7 @@ const login = (app, cb) => {
             code: res.code
           }
         }).then(res => {
-          console.log(res);
+          // console.log(res);
           app.globalData.token = res.data.token;
           cb && cb(app);
         }).catch(error => console.error(error));
@@ -178,7 +178,7 @@ const get_userinfo = (app) => {
     },
     method: "post"
   }).then(res => {
-    console.log(res);
+    // console.log(res);
     if (res.data.status == 0) {
       app.globalData.userInfo = res.data.data;
     }

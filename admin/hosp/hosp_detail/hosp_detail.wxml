@@ -1,4 +1,5 @@
 <import src="/tmpl/loading/loading.wxml" />
+<import src="/tmpl/input-bar/input-bar.wxml" />
 
 <view class="hosp_detail {{tag?'add':''}}">
   <block wx:if="{{tag}}">

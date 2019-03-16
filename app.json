@@ -21,7 +21,9 @@
         "update/update",
         "search/search",
         "hosp/hosp_list/hosp_list",
-        "hosp/hosp_detail/hosp_detail"
+        "hosp/hosp_detail/hosp_detail",
+        "dept/dept_list/dept_list",
+        "dept/dept_detail/dept_detail"
       ]
     }
   ],

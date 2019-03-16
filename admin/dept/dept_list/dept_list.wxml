@@ -2,7 +2,6 @@
 <import src="/tmpl/admin-list/admin-list.wxml" />
 <import src="/tmpl/no-more-data/no-more-data.wxml" />
 <import src="/tmpl/no-data/no-data.wxml" />
-<import src="/tmpl/bottom-button/bottom-button.wxml" />
 
 <block wx:if="{{loading}}">
   <template is="loading"></template>
@@ -19,6 +18,16 @@
         <template is="no-more-data" data="{{loadMore}}"></template>
       </block>
     </block>
-    <template is="bottom-button" data="{{edit, navUrl}}"></template>
+
+    <view class="flex flex-y-center button-row">
+      <block wx:if="{{edit}}">
+        <button class="no-button iconfont icon-delete" catchtap="deleteHosp"></button>
+      </block>
+      <block wx:else>
+        <button class="no-button iconfont icon-add" data-url="/admin/hosp/hosp_detail/hosp_detail" data-tag="add"
+          catchtap="jump"></button>
+      </block>
+      <button class="no-button iconfont icon-edit" catchtap="editHosp"></button>
+    </view>
   </view>
 </block>

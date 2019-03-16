@@ -12,7 +12,7 @@ Page({
     login: function () {
         wx.login({
             success: function (res) {
-                console.log(res)
+                // console.log(res)
                 // if (res.code) {
                 //     wx.request({
                 //         url: 'http://127.0.0.1:7001/login',
