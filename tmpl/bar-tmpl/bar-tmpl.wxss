@@ -1,0 +1,83 @@
+.image-bar,
+.input-bar,
+.textarea-bar,
+.location-bar,
+.image-data-bar,
+.data-bar {
+    padding: 0 30rpx;
+    border-bottom: 1px solid var(--borderColorTwo);
+}
+
+.image-bar .label,
+.input-bar .label,
+.textarea-bar .label,
+.location-bar .label,
+.image-data-bar .label,
+.data-bar .label {
+    margin-right: 30rpx;
+    padding: 40rpx 0;
+    line-height: 1;
+}
+
+.image-bar .icon-camera {
+    width: 140rpx;
+    height: 140rpx;
+    margin: 20rpx 0;
+    color: #fff;
+    text-align: center;
+    line-height: 140rpx;
+    background-color: #ccc;
+}
+
+.image-bar .image {
+    width: 140rpx;
+    height: 140rpx;
+    margin: 20rpx 0;
+}
+
+.textarea-bar.n-b {
+    border-bottom: 0;
+}
+
+.textarea-bar .textarea {
+    height: 250rpx;
+    margin: 40rpx 0;
+}
+
+.location-bar .icon-location {
+    margin-left: 30rpx;
+    color: var(--backgroundColorOne);
+}
+
+.add-button {
+    height: 100rpx;
+    border-radius: 100rpx;
+    margin: 0 30rpx;
+    color: #fff;
+    text-align: center;
+    line-height: 100rpx;
+    background-color: var(--backgroundColorOne);
+}
+
+.image-data-bar,
+.data-bar {
+    border-bottom: 1px solid var(--borderColorOne);
+    background-color: #fff;
+}
+
+.image-data-bar .image {
+    width: 140rpx;
+    height: 140rpx;
+    margin: 20rpx 0;
+}
+
+.data-bar .value {
+    color: var(--colorOne);
+    text-align: right;
+    line-height: 1;
+}
+
+.data-bar .icon-enter {
+    margin-left: 10rpx;
+    color: var(--colorOne);
+}

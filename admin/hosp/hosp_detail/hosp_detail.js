@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
+
   },
   params: {},
 
@@ -25,6 +25,7 @@ Page({
         id: this.options.id
       }
     }).then(res => {
+      // console.log(res);
       let data = {
         loading: false
       };
@@ -49,45 +50,6 @@ Page({
   },
 
   /**
-   * 删除医院
-   */
-  // deleteHosp() {
-  //   let that = this;
-  //   wx.showModal({
-  //     title: '提示',
-  //     content: '是否删除该医院？',
-  //     success(res) {
-  //       if (res.confirm) {
-  //         RESTful.destroy({
-  //           url: API.hosp,
-  //           data: {
-  //             id: that.options.id
-  //           }
-  //         }).then(res => {
-  //           if (res.data.status == 0) {
-  //             wx.showToast({
-  //               title: res.data.msg,
-  //               complete() {
-  //                 let id = setTimeout(() => {
-  //                   wx.navigateBack();
-  //                   clearTimeout(id);
-  //                 }, 1500);
-  //               }
-  //             });
-  //           } else {
-  //             wx.showToast({
-  //               title: res.data.msg
-  //             });
-  //           }
-  //         }).catch(error => {
-  //           console.error(error);
-  //         });
-  //       }
-  //     }
-  //   })
-  // },
-
-  /**
    * 更新医院图标
    */
   updateHospitalLogo() {
@@ -101,7 +63,7 @@ Page({
         data: this.params,
         method: 'put'
       }).then(res => {
-        // console.log(res)
+        // console.log(res);
         wx.hideLoading();
         if (res.data.status == 0) {
           this.setData({
@@ -168,49 +130,6 @@ Page({
   },
 
   /**
-   * 阻止掩膜滑动
-   */
-  // stopTouch() {
-  //   return;
-  // },
-
-  /**
-   * 显示弹窗
-   */
-  // showPop() {
-  //   this.setData({
-  //     show_pop: true
-  //   });
-  // },
-
-  /**
-   * 关闭弹窗
-   */
-  // hidePop() {
-  //   this.setData({
-  //     show_pop: false
-  //   });
-  // },
-
-  /**
-   * 输入图片地址
-   */
-  // inputImage() {
-  //   this.setData({
-  //     input_image: true
-  //   });
-  // },
-
-  /**
-   * 关闭图片地址输入
-   */
-  // closeInputImage() {
-  //   this.setData({
-  //     input_image: false
-  //   });
-  // },
-
-  /**
    * 选择图片
    */
   chooseImage() {
@@ -230,15 +149,6 @@ Page({
       }
     });
   },
-
-  /**
-   * 选择区域
-   */
-  // chooseRegion() {
-  //   wx.navigateTo({
-  //     url: '/pages/region/region?id=1&time=1'
-  //   });
-  // },
 
   /**
    * 选择地址
@@ -262,7 +172,7 @@ Page({
   /**
    * 添加医院
    */
-  addHosp() {
+  addEvent() {
     if (!this.params.hospitalLogo) {
       wx.showToast({
         title: '医院图标不能为空',
@@ -284,13 +194,6 @@ Page({
       });
       return;
     }
-    // if (!this.params.region) {
-    //   wx.showToast({
-    //     title: '地区信息不能为空',
-    //     icon: 'none'
-    //   });
-    //   return;
-    // }
     if (!this.params.address) {
       wx.showToast({
         title: '详细地址不能为空',
@@ -315,6 +218,7 @@ Page({
         data: this.params,
         method: 'post'
       }).then(res => {
+        // console.log(res)
         wx.hideLoading();
         if (res.data.status == 0) {
           app.globalData.hospInit = true;
@@ -348,6 +252,7 @@ Page({
       filePath: this.data.hospitalLogo,
       formData: { fileSize: this.data.logoSize ? this.data.logoSize : '' }
     }).then(res => {
+      // console.log(res);
       if (res.data.status == 1) {
         this.params.hospitalLogo = res.data.data.url;
         cb && cb();
@@ -393,13 +298,6 @@ Page({
         this.getHospDetail();
       }
     }
-    // if (app.globalData.region) {
-    //   this.params.region = app.globalData.region;
-    //   this.setData({
-    //     region: app.globalData.region
-    //   });
-    //   app.globalData.region = "";
-    // }
   },
 
   /**
