@@ -26,7 +26,6 @@
 .image-bar .image {
     width: 140rpx;
     height: 140rpx;
-    margin: 20rpx 0;
 }
 
 .textarea-bar .textarea {

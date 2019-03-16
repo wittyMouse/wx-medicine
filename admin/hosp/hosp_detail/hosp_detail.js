@@ -253,7 +253,7 @@ Page({
       formData: { fileSize: this.data.logoSize ? this.data.logoSize : '' }
     }).then(res => {
       // console.log(res);
-      if (res.data.status == 1) {
+      if (res.data.status == 0) {
         this.params.hospitalLogo = res.data.data.url;
         cb && cb();
       } else {
