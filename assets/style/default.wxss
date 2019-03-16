@@ -70,3 +70,11 @@ page {
 .no-button::after {
     border: 0;
 }
+
+.bg-white {
+    background-color: #fff;
+}
+
+.n-b {
+    border-bottom: 0 !important;
+}

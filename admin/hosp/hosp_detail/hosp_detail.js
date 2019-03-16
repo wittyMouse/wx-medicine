@@ -172,7 +172,7 @@ Page({
   /**
    * 添加医院
    */
-  addEvent() {
+  buttonEvent() {
     if (!this.params.hospitalLogo) {
       wx.showToast({
         title: '医院图标不能为空',

@@ -1,40 +1,9 @@
-.update {}
+.update {
+    
+}
 
-.update .row {
+.update .wrapper {
+    margin-bottom: 50rpx;
     padding: 0 30rpx;
     background-color: #fff;
-}
-
-.update .label {
-    margin-right: 30rpx;
-    padding: 40rpx 0;
-    line-height: 1;
-}
-
-.update .data {
-    color: var(--colorOne);
-    text-align: right;
-    line-height: 1;
-}
-
-.update .new-data {
-    margin-bottom: 50rpx;
-}
-
-.update .input {
-    padding: 40rpx 0;
-}
-
-.update .icon-location {
-    margin-left: 30rpx;
-    color: var(--backgroundColorOne);
-}
-
-.update .confirm {
-    height: 100rpx;
-    margin: 0 30rpx;
-    color: #fff;
-    text-align: center;
-    line-height: 100rpx;
-    background-color: var(--backgroundColorOne);
 }

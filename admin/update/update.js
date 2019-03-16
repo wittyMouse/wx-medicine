@@ -21,9 +21,38 @@ Page({
   },
 
   /**
+   * 选择地址
+   */
+  chooseLocation() {
+    let that = this;
+    wx.chooseLocation({
+      success(res) {
+        if (res.address || res.name) {
+          that.params.address = res.address + ' ' + res.name;
+          that.params.latitude = res.latitude;
+          that.params.longitude = res.longitude;
+          that.setData({
+            keyword: res.address + ' ' + res.name
+          });
+        }
+      }
+    });
+  },
+
+  /**
+   * 失去焦点事件
+   * @param {*} e 
+   */
+  blur(e) {
+    this.setData({
+      keyword: e.detail.value
+    });
+  },
+
+  /**
    * 确认事件
    */
-  confirm() {
+  buttonEvent() {
     if (!this.params[this.options.name] || this.params[this.options.name] == '') {
       wx.showToast({
         title: '新的' + this.options.label + '不能为空',
@@ -68,35 +97,6 @@ Page({
         });
       }
     })
-  },
-
-  /**
-   * 失去焦点事件
-   * @param {*} e 
-   */
-  blur(e) {
-    this.setData({
-      keyword: e.detail.value
-    });
-  },
-
-  /**
-   * 选择地址
-   */
-  chooseLocation() {
-    let that = this;
-    wx.chooseLocation({
-      success(res) {
-        if (res.address || res.name) {
-          that.params.address = res.address + ' ' + res.name;
-          that.params.latitude = res.latitude;
-          that.params.longitude = res.longitude;
-          that.setData({
-            keyword: res.address + ' ' + res.name
-          });
-        }
-      }
-    });
   },
 
   onLoad(options) {

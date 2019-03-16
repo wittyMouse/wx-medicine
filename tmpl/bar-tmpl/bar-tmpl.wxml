@@ -11,31 +11,32 @@
 </template>
 
 <template name="input-bar">
-    <label class="input-bar flex flex-y-center">
-        <view class="label flex-0">{{label}}</view>
-        <input class="input flex-1" placeholder="{{placeholder}}" data-name="{{name}}" bindinput="input" />
+    <label class="input-bar flex flex-y-center {{update?'n-b bg-white':''}}">
+        <view class="label flex-0" hidden="{{update}}">{{label}}</view>
+        <input class="input flex-1" placeholder="{{placeholder}}" focus="{{focus}}" data-name="{{name}}"
+            bindinput="input" />
     </label>
 </template>
 
 <template name="textarea-bar">
-    <label class="textarea-bar flex n-b">
-        <view class="label flex-0">{{label}}</view>
-        <textarea class="textarea flex-1" placeholder="{{placeholder}}" data-name="{{name}}"
+    <label class="textarea-bar flex n-b {{update?'bg-white':''}}">
+        <view class="label flex-0" hidden="{{update}}">{{label}}</view>
+        <textarea class="textarea flex-1" placeholder="{{placeholder}}" maxlength="{{1024}}" focus="{{focus}}" data-name="{{name}}"
             bindinput="input"></textarea>
     </label>
 </template>
 
 <template name="location-bar">
-    <label class="location-bar flex flex-y-center">
-        <view class="label flex-0">{{label}}</view>
-        <input class="input flex-1" value="{{address}}" placeholder="{{placeholder}}" data-name="{{name}}"
-            bindinput="input" bindblur="blur" />
+    <label class="location-bar flex flex-y-center {{update?'n-b bg-white':''}}">
+        <view class="label flex-0" hidden="{{update}}">{{label}}</view>
+        <input class="input flex-1" value="{{address}}" placeholder="{{placeholder}}" focus="{{focus}}"
+            data-name="{{name}}" bindinput="input" bindblur="blur" />
         <view class="flex-0 iconfont icon-location" catchtap="chooseLocation"></view>
     </label>
 </template>
 
 <template name="button-bar">
-    <button class='no-button add-button' bindtap="addEvent">{{text}}</button>
+    <button class="no-button button {{update?'m-l-r':''}}" bindtap="buttonEvent">{{text}}</button>
 </template>
 
 <template name="image-data-bar">
@@ -50,6 +51,6 @@
         bindtap="updateHosp">
         <view class="flex-0 label">{{label}}</view>
         <view class="flex-1 value">{{value}}</view>
-        <view class="flex-0 iconfont icon-enter"></view>
+        <view class="flex-0 iconfont icon-enter" hidden="{{update}}"></view>
     </view>
 </template>

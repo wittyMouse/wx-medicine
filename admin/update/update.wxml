@@ -1,13 +1,18 @@
+<import src="/tmpl/bar-tmpl/bar-tmpl.wxml" />
+
 <view class="update">
-    <view class="flex flex-y-center row old-data">
-        <view class="flex-0 label">{{label}}</view>
-        <view class="flex-1 data">{{value}}</view>
-    </view>
-    <view class="flex flex-y-center row new-data">
-        <input class="flex-1 input" value="{{keyword}}" placeholder="请输入新的{{label}}" focus bindinput="input" bindblur="blur" />
+    <view class="wrapper">
+        <template is="data-bar" data="{{label, value, update: true}}"></template>
         <block wx:if="{{name=='address'}}">
-            <view class="flex-0 iconfont icon-location" catchtap="chooseLocation"></view>          
+            <template is="location-bar"
+                data="{{address: keyword, placeholder: '请输入新的'+label, focus: true, update: true}}"></template>
+        </block>
+        <block wx:elif="{{name=='introduction'}}">
+            <template is="textarea-bar" data="{{placeholder: '请输入新的'+label, focus: true, update: true}}"></template>
+        </block>
+        <block wx:else>
+            <template is="input-bar" data="{{placeholder: '请输入新的'+label, focus: true, update: true}}"></template>
         </block>
     </view>
-    <button class="no-button confirm" bindtap="confirm">确认</button>
+    <template is="button-bar" data="{{text: '确认', update: true}}"></template>
 </view>
