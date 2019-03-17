@@ -8,17 +8,16 @@
   <template is="loading"></template>
 </block>
 <block wx:else>
-  <view class="hosp_list">
+  <view class="user_list">
     <block wx:if="{{noData}}">
       <template is="no-data"></template>
     </block>
     <block>
       <search-bar bindentersearch="enterSearch"></search-bar>
-      <template is="hosp-list" data="{{dataList: hospList, edit, tag}}"></template>
+      <template is="user-list" data="{{dataList: userList, edit}}"></template>
       <block wx:if="{{loadMore||noMoreData}}">
         <template is="no-more-data" data="{{loadMore}}"></template>
       </block>
     </block>
-    <template is="bottom-button" data="{{edit, navUrl}}"></template>
   </view>
 </block>

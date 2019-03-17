@@ -70,10 +70,20 @@
 .data-bar .value {
     color: var(--colorOne);
     text-align: right;
-    line-height: 1;
+    /* line-height: 1; */
+    word-break: break-all;
 }
 
 .data-bar .icon-enter {
     margin-left: 10rpx;
     color: var(--colorOne);
+}
+
+.switch-bar {
+    background-color: #fff;
+}
+
+.switch-bar .label {
+    padding: 40rpx 30rpx;
+    line-height: 1;
 }

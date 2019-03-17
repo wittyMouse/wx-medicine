@@ -43,41 +43,20 @@ Page({
     // console.log(e);
     let { tag } = e.detail;
     if (tag == 'search') {
-      let { keyword } = e.detail.keyword;
-      if (!keyword) {
+      this.keyword = e.detail.keyword;
+      if (!this.keyword) {
         wx.showToast({
           title: '请输入要搜索的内容',
           icon: 'none'
         });
+        return;
       }
       if (this.data.noData) {
         this.setData({
           noData: false
         });
       }
-      switch (this.options.tag) {
-        case 'hosp':
-          this.search({
-            url: API.hosp_list,
-            data: {
-              keyword
-            }
-          }, (res) => {
-            if (res.data.status == 0) {
-              let data = {},
-                newArr = res.data.data;
-              if (newArr.length > 0) {
-                data.hospList = newArr;
-              } else {
-                data.noData = true;
-              }
-              this.setData(data);
-            }
-          });
-          break;
-        default:
-          break;
-      }
+      this.search();
     } else {
       wx.navigateBack();
     }
@@ -85,26 +64,58 @@ Page({
 
   /**
    * 搜索列表
-   * @param {*} data 
-   * @param {*} cb 
    */
-  search(data, cb) {
+  search() {
+    let url = ''
+    switch (this.options.tag) {
+      case 'hosp':
+        url = API.hosp_list
+        break;
+      case 'user':
+        url = API.user_list
+        break;
+      default:
+        break;
+    }
     wx.showLoading({
       title: '搜索中...',
       mask: true
     });
-    RESTful.request(data).then(res => {
+    RESTful.request({
+      url,
+      data: {
+        keyword: this.keyword
+      }
+    }).then(res => {
       // console.log(res);
       wx.hideLoading();
-      cb && cb(res);
+      if (res.data.status == 0) {
+        let data = {},
+          newArr = res.data.data;
+        if (newArr.length > 0) {
+          data.dataList = newArr;
+        } else {
+          data.noData = true;
+        }
+        this.setData(data);
+      }
     }).catch(error => console.error(error));
   },
 
   onLoad(options) {
-    if (options.tag) {
-      this.setData({
-        tag: options.tag
-      });
+    let listType = '';
+    switch (options.tag) {
+      case 'hosp':
+        listType = 'hosp-list';
+        break;
+      case 'user':
+        listType = 'user-list';
+        break;
+      default:
+        break;
     }
+    this.setData({
+      listType
+    });
   }
 })

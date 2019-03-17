@@ -23,7 +23,9 @@
         "hosp/hosp_list/hosp_list",
         "hosp/hosp_detail/hosp_detail",
         "dept/dept_list/dept_list",
-        "dept/dept_detail/dept_detail"
+        "dept/dept_detail/dept_detail",
+        "user/user_list/user_list",
+        "user/user_detail/user_detail"
       ]
     }
   ],

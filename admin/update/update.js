@@ -60,10 +60,20 @@ Page({
       });
       return;
     }
+    this.update();
+  },
+
+  /**
+   * 更新数据
+   */
+  update() {
     let url = "";
     switch (this.options.tag) {
       case 'hosp':
         url = API.hosp
+        break;
+      case 'user':
+        url = API.user
         break;
       default:
         break;
@@ -96,7 +106,12 @@ Page({
           icon: 'none'
         });
       }
-    })
+    }).catch(error => console.error(error));
+  },
+
+  changeEvent(e) {
+    this.params[this.options.name] = e.detail.value ? 1 : 0;
+    this.update();
   },
 
   onLoad(options) {

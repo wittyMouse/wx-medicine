@@ -87,7 +87,7 @@ Page({
    * 更新医院信息
    * @param {*} e 
    */
-  updateHosp(e) {
+  updateEvent(e) {
     let { label, name, value } = e.currentTarget.dataset;
     wx.navigateTo({
       url: `/admin/update/update?tag=hosp&id=${this.options.id}&label=${label}&name=${name}&value=${value}`

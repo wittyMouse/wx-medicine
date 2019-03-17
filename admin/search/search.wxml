@@ -2,5 +2,5 @@
 
 <view class="search">
     <search-bar searchInput bindsearchevent="searchEvent"></search-bar>
-    <template is="hosp-list" data="{{hospList}}"></template>    
+    <template is="{{listType}}" data="{{dataList}}"></template>    
 </view>
