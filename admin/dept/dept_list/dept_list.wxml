@@ -2,32 +2,23 @@
 <import src="/tmpl/admin-list/admin-list.wxml" />
 <import src="/tmpl/no-more-data/no-more-data.wxml" />
 <import src="/tmpl/no-data/no-data.wxml" />
+<import src="/tmpl/bottom-button/bottom-button.wxml" />
 
 <block wx:if="{{loading}}">
   <template is="loading"></template>
 </block>
 <block wx:else>
-  <view class="hosp_list">
+  <view class="dept_list">
     <block wx:if="{{noData}}">
       <template is="no-data"></template>
     </block>
     <block>
       <search-bar bindentersearch="enterSearch"></search-bar>
-      <template is="hosp-list" data="{{hospList, edit}}"></template>
+      <template is="dept-list" data="{{deptList, edit}}"></template>
       <block wx:if="{{loadMore||noMoreData}}">
         <template is="no-more-data" data="{{loadMore}}"></template>
       </block>
     </block>
-
-    <view class="flex flex-y-center button-row">
-      <block wx:if="{{edit}}">
-        <button class="no-button iconfont icon-delete" catchtap="deleteHosp"></button>
-      </block>
-      <block wx:else>
-        <button class="no-button iconfont icon-add" data-url="/admin/hosp/hosp_detail/hosp_detail" data-tag="add"
-          catchtap="jump"></button>
-      </block>
-      <button class="no-button iconfont icon-edit" catchtap="editHosp"></button>
-    </view>
+    <template is="bottom-button" data="{{edit, navUrl}}"></template>
   </view>
 </block>

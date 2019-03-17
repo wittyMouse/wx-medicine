@@ -35,7 +35,7 @@ const API = {
     dept_delete: HOST + "/dept_delete",
 
     // 医生
-    hosp: HOST + "/doctor",
+    doctor: HOST + "/doctor",
 
     // 获取医生列表
     doctor_list: HOST + "/doctor_list",

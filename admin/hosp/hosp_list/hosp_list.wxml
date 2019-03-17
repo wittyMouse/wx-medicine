@@ -14,7 +14,7 @@
     </block>
     <block>
       <search-bar bindentersearch="enterSearch"></search-bar>
-      <template is="hosp-list" data="{{hospList, edit}}"></template>
+      <template is="hosp-list" data="{{hospList, edit, tag}}"></template>
       <block wx:if="{{loadMore||noMoreData}}">
         <template is="no-more-data" data="{{loadMore}}"></template>
       </block>

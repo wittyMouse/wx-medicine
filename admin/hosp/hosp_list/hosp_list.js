@@ -21,12 +21,12 @@ Page({
   jump(e) {
     let url = "",
       dataset = e.currentTarget.dataset;
-    for (let i in dataset) {
-      if (i == 'i') {
+    for (let key in dataset) {
+      if (key == 'i') {
         continue;
       }
-      if (i == 'url') {
-        url = dataset[i] + url;
+      if (key == 'url') {
+        url = dataset[key] + url;
       } else {
         let temp = "";
         if (url.search(/\?/g) > -1) {
@@ -34,7 +34,7 @@ Page({
         } else {
           temp = '?';
         }
-        url += temp + i + '=' + dataset[i];
+        url += temp + key + '=' + dataset[key];
       }
     }
     wx.navigateTo({
@@ -65,7 +65,7 @@ Page({
    * 选择医院
    * @param {*} e 
    */
-  selectHosp(e) {
+  selectEvent(e) {
     let { i, id } = e.currentTarget.dataset;
     if (this.data.hospList[i].selected) {
       for (let i = 0; i < this.selectedList.length; i++) {
@@ -231,6 +231,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.tag) {
+      this.setData({
+        tag: options.tag
+      });
+    }
     this.getHospList();
   },
 
@@ -270,7 +275,7 @@ Page({
    */
   onPullDownRefresh: function () {
     if (this.data.edit) {
-      this.editHosp();
+      this.editEvent();
     }
     this.getHospList(0);
   },
