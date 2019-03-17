@@ -33,23 +33,24 @@ Page({
             mask: true,
         });
         if (data.errMsg == 'getUserInfo:ok') {
+            let userInfo = data.userInfo;
             data.token = app.globalData.token;
+            data.userInfo = JSON.stringify(data.userInfo);
             request({
                 url: API.set_userinfo,
                 method: 'post',
                 data
             }).then(res => {
                 // console.log(res);
+                wx.hideLoading();
                 if(res.data.status == 0) {
-                    app.globalData.userInfo = data.userInfo;
+                    app.globalData.userInfo = userInfo;
                     this.setData({
                         isLogin: true,
-                        avatarUrl: data.userInfo.avatarUrl,
-                        nickName: data.userInfo.nickName
+                        avatarUrl: userInfo.avatarUrl,
+                        nickName: userInfo.nickName
                     });
-                    wx.hideLoading();
                 } else {
-                    wx.hideLoading();
                     wx.showToast({
                         title: '登录失败，请检查网络连接',
                         icon: 'none'

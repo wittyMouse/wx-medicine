@@ -17,8 +17,10 @@
 }
 
 .user .header .icon-caidan08 {
+    width: 150rpx;
+    height: 150rpx;
     font-size: 150rpx;
-    margin-bottom: 20rpx;
+    margin: 0 auto 20rpx;
 }
 
 .user .header .username {

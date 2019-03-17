@@ -1,5 +1,5 @@
 .header {
-  background: url('http://127.0.0.1/bg.jpg') no-repeat;
+  background: url('http://127.0.0.1:7001/public/images/bg.jpg') no-repeat;
   background-size: cover;
   padding: 250rpx 30rpx 20rpx;
 }

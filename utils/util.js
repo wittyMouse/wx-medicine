@@ -154,11 +154,19 @@ const login = (app, cb) => {
           url: API.login,
           data: {
             code: res.code
-          }
+          },
+          method: 'post'
         }).then(res => {
           // console.log(res);
-          app.globalData.token = res.data.token;
-          cb && cb(app);
+          if (res.data.status == 0) {
+            app.globalData.token = res.data.data.token;
+            cb && cb(app);
+          } else {
+            wx.showToast({
+              title: '登录错误，请检查网络连接',
+              icon: 'none'
+            });
+          }
         }).catch(error => console.error(error));
       } else {
         wx.showToast({
@@ -178,7 +186,7 @@ const get_userinfo = (app) => {
     },
     method: "post"
   }).then(res => {
-    // console.log(res);
+    console.log(res);
     if (res.data.status == 0) {
       app.globalData.userInfo = res.data.data;
     }
