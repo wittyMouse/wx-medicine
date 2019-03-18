@@ -25,7 +25,11 @@
         "dept/dept_list/dept_list",
         "dept/dept_detail/dept_detail",
         "user/user_list/user_list",
-        "user/user_detail/user_detail"
+        "user/user_detail/user_detail",
+        "register/register_list/register_list",
+        "register/register_detail/register_detail",
+        "roster/roster_list/roster_list",
+        "roster/roster_detail/roster_detail"
       ]
     }
   ],

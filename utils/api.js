@@ -11,10 +11,10 @@ const API = {
     upload: HOST + "/common/upload",
 
     // 保存用户信息
-    set_userinfo: HOST + '/user/set_userinfo',
+    set_userinfo: HOST + '/set_userinfo',
 
     // 获取用户信息
-    get_userinfo: HOST + '/user/get_userinfo',
+    get_userinfo: HOST + '/get_userinfo',
 
     // 医院
     hosp: HOST + "/hospital",

@@ -54,3 +54,22 @@
     </block>
   </view>
 </template>
+
+<template name="register-list">
+    <view class="register-list">
+      <block wx:for="{{dataList}}" wx:key="index">
+        <view class="flex flex-y-center register-item" data-url="/admin/register/register_detail/register_detail" data-id="{{item.openId}}" data-i="{{index}}" bindtap="{{edit?'selectEvent':'jump'}}">
+          <block wx:if="{{edit}}">
+            <block wx:if="{{item.selected}}">
+              <view class="flex-0 iconfont icon-icon_selected_fill"></view>
+            </block>
+            <block wx:else>
+              <view class="flex-0 iconfont icon-icon_selected_no"></view>
+            </block>
+          </block>
+          <image class="flex-0 register-logo" mode="" src="{{item.avatarUrl}}" />
+          <view class="flex-1 register-name">{{item.nickName}}</view>
+        </view>
+      </block>
+    </view>
+  </template>

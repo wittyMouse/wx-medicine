@@ -1,0 +1,7 @@
+{
+    "navigationBarTitleText": "挂号信息管理",
+    "enablePullDownRefresh": true,
+    "usingComponents": {
+        "search-bar": "/components/search-bar/search-bar"
+    }
+}
