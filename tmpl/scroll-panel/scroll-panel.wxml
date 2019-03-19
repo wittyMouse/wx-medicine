@@ -1,0 +1,20 @@
+<template name="scroll-panel">
+    <view class="scroll-panel" style="height: {{panelHeight}}px;">
+        <scroll-view scroll-y scroll-with-animation class="scroll-view">
+            <block wx:for="{{list}}" wx:key="index">
+                <view class="row" style="background-color: {{index==currentIndex?'#fff':''}};" data-index="{{index}}" bindtap="scrollItemTap">
+                    <view class="col place {{index==currentIndex?'iconfont icon-youjiantou':''}}"></view>
+                    <view class="line-1 col text {{index==currentIndex?'color':''}}">{{item.name}}</view>
+                </view>
+            </block>
+        </scroll-view>
+        <scroll-view scroll-y scroll-with-animation class="scroll-view bg-white">
+            <block wx:for="{{list[currentIndex].childList}}" wx:key="index">
+                <view class="row" data-tag="child" data-index="{{index}}" bindtap="scrollItemTap">
+                    <view class="col place {{index==currentChildIndex?'iconfont icon-youjiantou':''}}"></view>
+                    <view class="line-1 col text">{{item.name}}</view>
+                </view>
+            </block>
+        </scroll-view>
+    </view>
+</template>

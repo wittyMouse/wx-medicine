@@ -1,25 +1,20 @@
-<import src="/tmpl/loading/loading.wxml" />
+<import src="/tmpl/scroll-panel/scroll-panel.wxml" />
 
-<block wx:if="{{loading}}">
-    <template is="loading" />
-</block>
-<block wx:else>
-    <view class="dept">
-        <view class="header">
-            <view class="flex flex-x-center flex-y-center search" data-tag="search" bindtap="jump">
-                <view class="iconfont icon-search"></view>
-                <view class="txt">搜索科室或医生</view>
-            </view>
-        </view>
-        <view class="container">
-            <view class="dept-list">
-                <block wx:for="{{2}}" wx:key="index">
-                    <view class="flex flex-y-center item" data-tag="dept" data-i="{{index}}" bindtap="jump">
-                        <view class="flex-1 line-1 name">外科</view>
-                        <view class="flex-0 iconfont icon-enter"></view>
-                    </view>
-                </block>
-            </view>
-        </view>
+<view class="">
+  <view class="header">
+    <view class="flex flex-y-center hosp-card">
+      <image class="flex-0 image" mode="aspectFill" src="{{hospDetil.hospitalLogo}}" />
+      <view class="flex-1 row">
+        <view class="line-1 text name">{{hospDetil.hospitalName}}</view>
+        <view class="line-1 text address">{{hospDetil.address}}</view>
+        <view class="line-1 text remarks">{{hospDetil.introduction}}</view>
+      </view>
     </view>
-</block>
+    <view class="flex flex-y-center title-bar">
+      <view class="flex-0 lable"></view>
+      <view class="flex-1 text">科室</view>
+    </view>
+  </view>
+
+  <template is="scroll-panel" data="{{...tmplData}}"></template>
+</view>

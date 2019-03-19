@@ -1,51 +1,50 @@
-.dept {
-
-}
-
-.dept .header {
-    padding: 30rpx;
-}
-
-.header .search {
-    height: 40rpx;
+.header .hosp-card {
+    margin-bottom: 20rpx;
     padding: 20rpx 30rpx;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    border-radius: 10rpx;
-}
-
-.search .icon-search {
-    margin-right: 10rpx;
-    font-size: 36rpx;
-    color: #aaa;
-}
-
-.search .txt {
-    font-size: 30rpx;
-    color: #aaa;
-}
-
-.dept .container {
-    padding: 30rpx;
-}
-
-.container .dept-list {
-    padding: 0 30rpx;
-    border-radius: 10rpx;
     background-color: #fff;
 }
 
-.dept-list .item {
-    justify-content: space-between;
-    padding: 30rpx 0;
+.header .hosp-card .image {
+    width: 120rpx;
+    height: 120rpx;
+    margin-right: 20rpx;
+}
+
+.header .hosp-card .row {}
+
+.header .hosp-card .row .text {}
+
+.header .hosp-card .row .name {
+    height: 50rpx;
+    font-size: 34rpx;
+}
+
+.header .hosp-card .row .address {
+    height: 40rpx;
+    font-size: 26rpx;
+    color: var(--colorOne);
+}
+
+.header .hosp-card .row .remarks {
+    height: 40rpx;
+    font-size: 26rpx;
+    color: var(--colorOne);
+}
+
+.header .title-bar {
+    padding: 20rpx 30rpx;
+    background-color: #fff;
     border-bottom: 1px solid #f5f5f5;
 }
 
-.dept-list .item .name {
-    font-size: 30rpx;
+.header .title-bar .lable {
+    width: 10rpx;
+    height: 30rpx;
+    margin-right: 20rpx;
+    background-color: var(--backgroundColorOne);
 }
 
-.dept-list .item .icon-enter {
-    font-size: 36rpx;
-    color: #666;
+.header .title-bar .text {
+    font-size: 32rpx;
+    color: var(--backgroundColorOne);
 }

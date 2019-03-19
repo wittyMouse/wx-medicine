@@ -10,6 +10,8 @@ page {
     --borderColorTwo: #ddd;
     --backgroundColorOne: #4169e1;
     --colorOne: #aaa;
+    --color-one: #ddd;
+    --font-size-one: ;
 }
 
 .flex {

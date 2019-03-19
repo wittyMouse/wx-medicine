@@ -1,0 +1,46 @@
+.scroll-panel {}
+
+.scroll-panel .scroll-view {
+    height: 100%;
+}
+
+.scroll-panel .scroll-view:first-child {
+    float: left;
+    width: 40%;
+}
+
+.scroll-panel .scroll-view:last-child {
+    float: right;
+    width: 60%;
+}
+
+.scroll-panel .scroll-view .row {
+    padding: 30rpx;
+}
+
+/* .scroll-panel .scroll-view:first-child .row {
+    border-bottom: 1px solid var(--color-one);
+} */
+
+.scroll-panel .scroll-view .row .col {
+    display: inline-block;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+.scroll-panel .scroll-view .row .place {
+    width: 40rpx;
+}
+
+.scroll-panel .scroll-view .row .icon-youjiantou {
+    font-size: 20rpx;
+    color: var(--backgroundColorOne);
+}
+
+.scroll-panel .scroll-view .row .text {
+    font-size: 30rpx;
+}
+
+.scroll-panel .scroll-view .row .text.color {
+    color: var(--backgroundColorOne);
+}
