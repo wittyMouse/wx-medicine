@@ -11,6 +11,7 @@
     "pages/wallet/wallet",
     "pages/put/put",
     "pages/region/region",
+    "pages/doctor/doctor",
     "pages/test/test"
   ],
   "subpackages": [

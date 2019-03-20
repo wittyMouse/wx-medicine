@@ -61,6 +61,11 @@ const API = {
     // 批量删除就诊人
     patient_delete: HOST + "/patient_delete",
 
+    // 排班医生
+    roster_doctor: HOST + "/roster_doctor",
+    roster_doctor_list: HOST + "/roster_doctor_list",
+    roster_doctor_delete: HOST + "/roster_doctor_delete",
+
 };
 
 module.exports = {

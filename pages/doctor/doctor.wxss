@@ -1,0 +1,122 @@
+.doctor {
+    padding-top: 100rpx;
+    background-color: #fff;
+}
+
+.doctor .tab {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100rpx;
+    border-top: 1px solid #f5f5f5;
+    border-bottom: 1px solid #f5f5f5;
+    background-color: #fff;
+}
+
+.doctor .tab .tab-item {
+    position: relative;
+    width: 50%;
+    height: 100%;
+}
+
+.doctor .tab .tab-item:first-child {
+    float: left;
+}
+
+.doctor .tab .tab-item:last-child {
+    float: right;
+}
+
+.doctor .tab .tab-item .text {
+    font-size: 30rpx;
+    line-height: 90rpx;
+    text-align: center;
+}
+
+.doctor .tab .tab-item .text.color {
+    color: var(--backgroundColorOne);
+}
+
+.doctor .tab .tab-item .under-line {
+    position: absolute;
+    left: 50%;
+    bottom: 15rpx;
+    width: 80rpx;
+    height: 5rpx;
+    background-color: var(--backgroundColorOne);
+    transform: translate3d(-50%, 0, 0);
+}
+
+.doctor .tab-container {}
+
+.doctor .tab-container .week-row {}
+
+.doctor .tab-container .week-row .week-col {
+    height: 100rpx;
+    text-align: center;
+    line-height: 100rpx;
+}
+
+.doctor .tab-container .week-row .week-col.iconfont {
+    width: 100rpx;
+}
+
+.doctor .tab-container .week-row .week-col.text {
+    font-size: 30rpx;
+}
+
+.date-list {
+    border-top: 1px solid #f5f5f5;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.date-list .date-item {
+    flex-direction: column;
+    height: 100rpx;
+    font-size: 28rpx;
+    text-align: center;
+    border-left: 1px solid #f5f5f5;
+}
+
+.date-list .date-item:first-child {
+    border-left: 0;
+}
+
+.date-list .date-item.color {
+    color: #fff;
+    background-color: var(--backgroundColorOne);
+}
+
+.date-list .date-item .text {}
+
+.date-list .date-item .week {
+    margin-bottom: 5rpx;
+}
+
+.date-list .date-item .date {}
+
+.doctor-list {
+    padding: 0;
+}
+
+.doctor-list .doctor-item {
+    padding: 30rpx;
+}
+
+.doctor-list .doctor-item .image {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+    margin-right: 20rpx;
+}
+
+.doctor-list .doctor-item .row {}
+
+.doctor-list .doctor-item .row .text {
+    font-size: 30rpx;
+}
+
+.doctor-list .doctor-item .row .icon-enter {
+    margin-right: 20rpx;
+}

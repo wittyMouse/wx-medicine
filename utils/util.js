@@ -195,6 +195,7 @@ const get_userinfo = (app) => {
 
 module.exports = {
   formatTime,
+  formatNumber,
   rpxToPx,
   pxToRpx,
   getLocationAuth,

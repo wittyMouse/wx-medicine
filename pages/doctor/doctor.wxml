@@ -1,0 +1,53 @@
+<import src="/tmpl/loading/loading.wxml" />
+
+<block wx:if="{{loading}}">
+  <template is="loading"></template>
+</block>
+<block wx:else>
+  <view class="doctor">
+    <view class="tab">
+      <view class="tab-item" data-index="{{0}}" bindtap="tabChange">
+        <view class="text {{0==currentIndex?'color':''}}">按日期预约</view>
+        <view class="under-line" hidden="{{1==currentIndex}}"></view>
+      </view>
+      <view class="tab-item" data-index="{{1}}" bindtap="tabChange">
+        <view class="text {{1==currentIndex?'color':''}}">按医生预约</view>
+        <view class="under-line" hidden="{{0==currentIndex}}"></view>
+      </view>
+    </view>
+    <view class="tab-container">
+      <block wx:if="{{0==currentIndex}}">
+        <view class="header">
+          <view class="flex week-row">
+            <view class="flex-0 week-col iconfont icon-return" data-tag="last" bindtap="weekChange"></view>
+            <view class="flex-1 week-col text">{{dateList[0].fullDate}}—{{dateList[6].fullDate}}</view>
+            <view class="flex-0 week-col iconfont icon-enter" data-tag="next" bindtap="weekChange"></view>
+          </view>
+          <view class="flex date-list">
+            <block wx:for="{{dateList}}" wx:key="index">
+              <view class="flex-1 flex flex-x-center flex-y-center date-item {{index==currentDate?'color':''}}" data-index="{{index}}" bindtap="dateChange">
+                <view class="text week">{{weekList[item.day]}}</view>
+                <view class="text date">{{item.date}}</view>
+              </view>
+            </block>
+          </view>
+        </view>
+        <scroll-view class="doctor-list" scroll-y scroll-with-animation style="height: {{scrollHeight}}px;">
+          <block wx:for="{{rosterDoctorList}}" wx:key="index">
+            <view class="flex flex-y-center doctor-item">
+              <image class="flex-0 image" mode="aspectFill" src="{{item.doctorAvatar}}" />
+              <view class="flex-1 row">
+                <view class="text name">{{item.doctorName}}</view>
+                <view class="text remarks">{{item.introduction}}</view>
+              </view>
+              <view class="flex-0 iconfont icon-enter"></view>
+            </view>
+          </block>
+        </scroll-view>
+      </block>
+      <block wx:else>
+        <view class=""></view>
+      </block>
+    </view>
+  </view>
+</block>

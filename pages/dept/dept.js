@@ -22,9 +22,9 @@ Page({
       } else {
 
       }
-      // wx.navigateTo({
-      //   url: ''
-      // });
+      wx.navigateTo({
+        url: '/pages/doctor/doctor?id=' + this.data.tmplData.list[index].departmentId
+      });
     } else {
       if (this.data.tmplData['currentIndex'] != index) {
         this.setData({
@@ -49,7 +49,7 @@ Page({
   },
 
   /**
-   * 获取某医院科室列表
+   * 获取科室列表
    */
   getDeptList() {
     return RESTful.request({
@@ -95,6 +95,7 @@ Page({
         hospDetil,
         'tmplData.list': deptList
       });
+      this.pageInit();
     }).catch(error => console.log(error));
   },
 
@@ -111,7 +112,6 @@ Page({
   },
 
   onLoad() {
-    this.pageInit();
     this.dataInit();
   }
 })
