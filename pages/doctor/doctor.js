@@ -13,6 +13,13 @@ Page({
     currentDate: 0
   },
 
+  jump(e) {
+    let { id } = e.currentTarget.dataset;
+    wx.navigateTo({
+      url: '/pages/time/time?id=' + id
+    });
+  },
+
   /**
    * 切换星期
    * @param {*} e 

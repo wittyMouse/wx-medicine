@@ -66,6 +66,8 @@ const API = {
     roster_doctor_list: HOST + "/roster_doctor_list",
     roster_doctor_delete: HOST + "/roster_doctor_delete",
 
+    // 获取挂号记录列表
+    register_list: HOST + "/register_list",
 };
 
 module.exports = {

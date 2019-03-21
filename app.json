@@ -12,6 +12,7 @@
     "pages/put/put",
     "pages/region/region",
     "pages/doctor/doctor",
+    "pages/time/time",
     "pages/test/test"
   ],
   "subpackages": [

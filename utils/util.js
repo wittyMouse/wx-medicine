@@ -17,6 +17,29 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+/**
+ * 获取格式化时间
+ * @param {*} date 
+ * @param {*} pattern 
+ */
+const getFormatDate = (date, pattern) => {
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const hour = date.getHours();
+  const minute = date.getMinutes();
+  const second = date.getSeconds();
+
+  if (pattern == "yyyy-MM-dd") {
+    return [year, month, day].map(formatNumber).join('-');
+  } else if (pattern == "MM-dd") {
+    return [month, day].map(formatNumber).join('-');
+  } else if (pattern == "hh:mm") {
+    return [hour, minute].map(formatNumber).join(':');
+  } else if (pattern == "yyyy-MM-dd hh:mm:ss") {
+    return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':');
+  }
+}
 
 const rpxToPx = (rpx) => {
   let px = rpx * wx.getSystemInfoSync().windowWidth / 750;
@@ -196,6 +219,7 @@ const get_userinfo = (app) => {
 module.exports = {
   formatTime,
   formatNumber,
+  getFormatDate,
   rpxToPx,
   pxToRpx,
   getLocationAuth,

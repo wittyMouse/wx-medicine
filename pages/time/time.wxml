@@ -1,0 +1,20 @@
+<view class="time">
+    <view class="flex flex-y-center doctor">
+        <image class="flex-0 image" mode="aspectFill" src="{{doctorDetail.doctorAvatar}}" />
+        <view class="flex-1 row">
+            <view class="text name">{{doctorDetail.doctorName}}</view>
+            <view class="text remarks">{{doctorDetail.introduction}}</view>
+        </view>
+    </view>
+    <search-bar currentWeek="{{week}}" currentDate="{{date}}" binddatebarheight="getDateBarHeight" bindchange="changeEvent"></search-bar>
+    <scroll-view class="time-list" style="height: {{scrollHeight}}px;" scroll-y scroll-with-animation>
+        <block wx:for="{{timeList}}" wx:key="index">
+            <view class="flex flex-y-center time-time" hidden="{{item.hidden}}" data-time="{{item.time}}" data-registered="{{item.registered}}" bindtap="timeSelected">
+                <view class="flex-0 remarks {{item.registered?'disabled':''}}">{{item.registered?'已满诊':'可挂号'}}</view>
+                <view class="flex-1 time">{{item.time}}</view>
+                <view class="flex-0 label {{item.registered?'disabled':''}}">{{doctorDetail.fee}}元</view>
+                <view class="flex-0 place {{item.registered?'':'iconfont icon-enter'}}"></view>
+            </view>
+        </block>
+    </scroll-view>
+</view>

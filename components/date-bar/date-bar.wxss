@@ -1,0 +1,53 @@
+@import "/assets/style/default.wxss";
+@import "/assets/iconfont/iconfont.wxss";
+
+.date-bar {
+    background-color: #fff;
+}
+
+.week-row{
+    border-top: 1px solid #f5f5f5;
+}
+
+.week-row .week-col {
+    height: 100rpx;
+    text-align: center;
+    line-height: 100rpx;
+}
+
+.week-row .week-col.iconfont {
+    width: 100rpx;
+}
+
+.week-row .week-col.text {
+    font-size: 30rpx;
+}
+
+.date-list {
+    border-top: 1px solid #f5f5f5;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.date-list .date-item {
+    flex-direction: column;
+    height: 100rpx;
+    font-size: 28rpx;
+    border-left: 1px solid #f5f5f5;
+}
+
+.date-list .date-item:first-child {
+    border-left: 0;
+}
+
+.date-list .date-item.color {
+    color: #fff;
+    background-color: var(--backgroundColorOne);
+}
+
+.date-list .date-item .text {}
+
+.date-list .date-item .week {
+    margin-bottom: 5rpx;
+}
+
+.date-list .date-item .date {}

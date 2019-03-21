@@ -34,7 +34,7 @@
         </view>
         <scroll-view class="doctor-list" scroll-y scroll-with-animation style="height: {{scrollHeight}}px;">
           <block wx:for="{{rosterDoctorList}}" wx:key="index">
-            <view class="flex flex-y-center doctor-item">
+            <view class="flex flex-y-center doctor-item" data-id="{{item.doctorId}}" bindtap="jump">
               <image class="flex-0 image" mode="aspectFill" src="{{item.doctorAvatar}}" />
               <view class="flex-1 row">
                 <view class="text name">{{item.doctorName}}</view>

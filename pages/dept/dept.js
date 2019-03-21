@@ -77,10 +77,10 @@ Page({
   /**
    * 数据初始化
    */
-  dataInit() {
-    let p1 = this.getHospDetail();
-    let p2 = this.getDeptList();
-    Promise.all([p1, p2]).then(res => {
+  loadData() {
+    let p1 = this.getHospDetail;
+    let p2 = this.getDeptList;
+    Promise.all([p1(), p2()]).then(res => {
       // console.log(res);
       let hospDetil = {};
       if (res[0].data.status == 0) {
@@ -112,6 +112,6 @@ Page({
   },
 
   onLoad() {
-    this.dataInit();
+    this.loadData();
   }
 })
