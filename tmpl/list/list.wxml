@@ -1,15 +1,15 @@
 <template name="hosp">
     <view class="hosp-list">
         <block wx:for="{{hospList}}" wx:key="index">
-            <view class="flex hosp-item" data-tag="hosp" data-i="{{index}}" bindtap="jump">
-                <image mode="" class="flex-0 logo" src="" />
+            <view class="flex hosp-item" data-tag="hosp" data-i="{{index}}" data-id="{{item.hospitalId}}"  bindtap="jump">
+                <image mode="" class="flex-0 logo" mode="aspectFill" src="{{item.hospitalLogo}}" />
                 <view class="flex-1 info">
                     <view class="flex flex-y-center name">
                         <view class="flex-0 tag">{{tag}}三甲</view>
-                        <view class="flex-1 line-1 txt">{{name}}南方医科大学南方医院</view>
+                        <view class="flex-1 line-1 txt">{{item.hospitalName||'南方医科大学南方医院'}}</view>
                     </view>
                     <view class="line-1 desc">{{desc}}特色科室：整形美容外科 肾内科 病理科 神经科</view>
-                    <view class="line-1 address">{{address}}16.4km | 广东省广州市广州大道北路1838号</view>
+                    <view class="line-1 address">{{item.address||'16.4km | 广东省广州市广州大道北路1838号'}}</view>
                 </view>
             </view>
         </block>

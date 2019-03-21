@@ -1,4 +1,6 @@
 import { getLocationAuth, getLocation } from '../../utils/util';
+import { API } from '../../utils/api';
+const RESTful = require('../../utils/request');
 let app = getApp();
 
 Page({
@@ -35,10 +37,22 @@ Page({
       });
     } else if (tag == 'hosp') {
       wx.navigateTo({
-        url: '/pages/dept/dept?id=' + e.currentTarget.dataset.i
+        url: '/pages/dept/dept?id=' + e.currentTarget.dataset.id
       });
     }
   },
+
+  getHospList() {
+    RESTful.request({
+      url: API.hosp_list
+    }).then(res => {
+      console.log(res);
+      this.setData({
+        hospList: res.data.data
+      });
+    }).catch(error => console.error(error));
+  },
+
   onLoad(options) {
     let city = '加载中...';
     if (app.globalData.location.localCity) {
@@ -48,6 +62,7 @@ Page({
       city
     });
     getLocationAuth(this, app);
+    this.getHospList();
   },
   onShow() {
     if (app.globalData.location.selectedCity) {
