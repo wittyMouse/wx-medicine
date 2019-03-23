@@ -73,3 +73,31 @@
       </block>
     </view>
   </template>
+
+<template name="patient-list">
+  <view class="patient-list">
+    <block wx:for="{{dataList}}" wx:key="index">
+      <view class="flex flex-y-center patient-item" data-url="/pages/patient/patient_detail/patient_detail" data-id="{{item.patientId}}" data-index="{{index}}" bindtap="itemTap">
+        <block wx:if="{{edit}}">
+          <block wx:if="{{item.selected}}">
+            <view class="flex-0 iconfont icon-icon_selected_fill"></view>
+          </block>
+          <block wx:else>
+            <view class="flex-0 iconfont icon-icon_selected_no"></view>
+          </block>
+        </block>
+        <view class="flex-0 name">{{item.patientName}}</view>
+        <view class="flex-1 id-card">{{patient.numFormat(item.idCard)}}</view>
+        <view class="flex-0 iconfont icon-enter" hidden="{{tag||edit}}"></view>
+      </view>
+    </block>
+  </view>
+</template>
+
+<wxs module="patient">
+    var numFormat = function (str) {
+        var arr = str.match(getRegExp("(\d{3})(\d+)(\d{4})"));
+        return [arr[1], arr[2].replace(getRegExp("\d", 'g'), '*'), arr[3]].join('');
+    };
+    module.exports.numFormat = numFormat;
+</wxs>

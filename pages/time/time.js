@@ -29,7 +29,7 @@ Page({
       return;
     } else {
       wx.navigateTo({
-        url: `/pages/register/register?id=${this.options.id}&time=${this.data.fullDate + ' ' + time + ':00'}`
+        url: `/pages/register/register?id=${this.options.id}&dateTime=${this.data.fullDate + ' ' + time + ':00'}`
       });
     }
   },

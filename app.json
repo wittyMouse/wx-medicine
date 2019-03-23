@@ -13,6 +13,9 @@
     "pages/region/region",
     "pages/doctor/doctor",
     "pages/time/time",
+    "pages/register/register",
+    "pages/patient/patient",
+    "pages/patient/patient_detail/patient_detail",
     "pages/test/test"
   ],
   "subpackages": [

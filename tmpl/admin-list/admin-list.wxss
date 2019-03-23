@@ -70,3 +70,33 @@
   margin-right: 30rpx;
   color: var(--backgroundColorOne);
 }
+
+/* 就诊人信息列表样式 */
+.patient-list {
+  background-color: #fff;
+}
+
+.patient-list .patient-item {
+  height: 100rpx;
+  padding: 0 30rpx;
+  border-bottom: 1px solid #f5f5f5;
+  font-size: 30rpx;
+  line-height: 1;
+}
+
+.patient-list .patient-item .name {
+  margin-right: 50rpx;
+}
+
+.patient-list .patient-item .id-card {
+}
+
+.patient-list .patient-item .icon-enter {
+  font-size: 30rpx;
+}
+
+.patient-item .icon-icon_selected_fill,
+.patient-item .icon-icon_selected_no {
+  margin-right: 30rpx;
+  color: var(--backgroundColorOne);
+}

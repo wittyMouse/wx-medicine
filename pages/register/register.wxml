@@ -1,0 +1,47 @@
+<view class="register">
+    <view class="flex flex-y-center row">
+        <view class="flex-1 label">医生姓名</view>
+        <view class="flex-0 value">{{doctorDetail.doctorName}}</view>
+    </view>
+    <view class="flex flex-y-center row">
+        <view class="flex-1 label">就诊科室</view>
+        <view class="flex-0 value">{{doctorDetail.parentDepartmentName}} {{doctorDetail.departmentName}}</view>
+    </view>
+    <view class="flex flex-y-center row m-b">
+        <view class="flex-1 label">就诊时间</view>
+        <view class="flex-0 value">{{dateTime}}</view>
+    </view>
+    <view class="flex flex-y-center row m-b">
+        <view class="flex-1 label">挂号费</view>
+        <view class="flex-0 value">{{register.feeFormat(doctorDetail.fee)}}元</view>
+    </view>
+    <block wx:if="{{patientDetail}}">
+        <view class="flex flex-y-center row">
+            <view class="flex-0 name">{{patientDetail.patientName}}</view>
+            <view class="flex-1 id-card">{{register.numFormat(patientDetail.idCard)}}</view>
+            <view class="flex-0 iconfont icon-delete" bindtap="deletePatient"></view>
+        </view>
+    </block>
+    <block wx:else>
+        <view class="flex flex-y-center row" bindtap="jump">
+            <view class="flex-1 label">选择就诊人</view>
+            <view class="flex-0 iconfont icon-enter"></view>
+        </view>
+    </block>
+    <button class="no-button btn-confirm" bindtap="confirm">确认挂号</button>
+</view>
+
+<wxs module="register">
+    var feeFormat = function (fee) {
+        var arr = (fee + '').match(getRegExp("(\d+)(.?)(\d*)"));
+        arr[2] = arr[2] ? arr[2] : '.';
+        arr[3] = arr[3] ? arr[3][1] ? arr[3].length > 2 ? arr[3].substring(0, 2) : arr[3] : arr[3][0] + '0' : '00';
+        return [arr[1], arr[2], arr[3]].join('');
+    };
+    var numFormat = function (str) {
+        var arr = str.match(getRegExp("(\d{3})(\d+)(\d{4})"));
+        return [arr[1], arr[2].replace(getRegExp("\d", 'g'), '*'), arr[3]].join('');
+    };
+    module.exports.feeFormat = feeFormat;
+    module.exports.numFormat = numFormat;
+</wxs>

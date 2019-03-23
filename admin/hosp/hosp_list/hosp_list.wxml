@@ -12,7 +12,7 @@
     <block wx:if="{{noData}}">
       <template is="no-data"></template>
     </block>
-    <block>
+    <block wx:else>
       <search-bar bindentersearch="enterSearch"></search-bar>
       <template is="hosp-list" data="{{dataList: hospList, edit, tag}}"></template>
       <block wx:if="{{loadMore||noMoreData}}">

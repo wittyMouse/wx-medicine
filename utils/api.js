@@ -43,6 +43,9 @@ const API = {
     // 批量删除医生
     doctor_delete: HOST + "/doctor_delete",
 
+    // 获取医生详情
+    doctor_detail: HOST + "/doctor_detail",
+
     // 用户
     user: HOST + "/user",
 
