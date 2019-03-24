@@ -3,5 +3,8 @@ const RESTful = require('../../../utils/request');
 const app = getApp();
 
 Page({
+  data: {
+    loading: fasle
+  },
   
 })

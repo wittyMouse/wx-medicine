@@ -1,0 +1,41 @@
+<import src="/tmpl/loading/loading.wxml" />
+
+<block wx:if="{{loading}}">
+    <template is="loading"></template>
+</block>
+<block wx:else>
+    <view class="patient-detail">
+        <view class="row">
+            <view class="label">就诊人编号</view>
+            <view class="value">{{patientDetail.patientId}}</view>
+        </view>
+        <!-- <view class="row">
+            <view class="label">所属用户编号</view>
+            <view class="value">{{patientDetail.openId}}</view>
+        </view> -->
+        <view class="row">
+            <view class="label">就诊人姓名</view>
+            <view class="value">{{patientDetail.patientName}}</view>
+        </view>
+        <view class="row">
+            <view class="label">性别</view>
+            <view class="value">{{patientDetail.gender}}</view>
+        </view>
+        <view class="row">
+            <view class="label">证件号</view>
+            <view class="value">{{patientDetail.idCard}}</view>
+        </view>
+        <view class="row">
+            <view class="label">手机号码</view>
+            <view class="value">{{patientDetail.phoneNumber}}</view>
+        </view>
+        <view class="row">
+            <view class="label">地址</view>
+            <view class="value">{{patientDetail.address}}</view>
+        </view>
+        <view class="row">
+            <view class="label">默认就诊人</view>
+            <view class="value">{{patientDetail.isDefault}}</view>
+        </view>
+    </view>
+</block>

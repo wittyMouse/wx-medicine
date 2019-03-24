@@ -12,6 +12,7 @@ page {
     --colorOne: #aaa;
     --color-one: #ddd;
     --font-size-one: ;
+    --danger: #F56C6C;
 }
 
 .flex {

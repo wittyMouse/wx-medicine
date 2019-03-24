@@ -22,7 +22,7 @@
 }
 
 .row .icon-delete {
-    color: var(--backgroundColorOne);
+    color: var(--danger);
 }
 
 .btn-confirm {

@@ -9,7 +9,7 @@ Page({
         list: [
             { name: '余额', url: '/pages/wallet/wallet' },
             { name: '挂号记录', url: '/pages/note/note' },
-            { name: '收藏夹', url: '/pages/favorite/favorite' },
+            { name: '就诊人', url: '/pages/patient/patient' },
             { name: '后台管理', url: '/admin/index/index'}
         ]
     },
