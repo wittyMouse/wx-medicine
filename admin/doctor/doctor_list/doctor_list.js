@@ -18,44 +18,29 @@ Page({
    */
   jump() {
     wx.navigateTo({
-      url: "/admin/dept/dept_detail/dept_detail?tag=add"
+      url: "/admin/doctor/doctor_detail/doctor_detail?tag=add"
     });
   },
 
   itemEvent(e) {
-    let { id, tag } = e.currentTarget.dataset;
-    if (!tag && this.data.tag) {
-      return;
-    }
-    let url = "";
-    switch(this.data.tag) {
-      case 'doctor':
-        url = "/admin/doctor/doctor_list/doctor_list?id=" + id;
-        break;
-      case 'roster':
-        url = "/admin/roster/roster_list/roster_list?id=" + id;
-        break;
-      default:
-        url = "/admin/dept/dept_detail/dept_detail?id=" + id;
-        break;
-    }
+    let { id } = e.currentTarget.dataset;
     wx.navigateTo({
-      url
+      url: "/admin/doctor/doctor_detail/doctor_detail?id=" + id
     });
   },
 
   /**
-   * 编辑科室
+   * 编辑医生
    */
   editEvent() {
     if (!this.data.noData) {
       let data = {};
       if (this.data.edit && this.selectedList.length > 0) {
-        let deptList = this.data.deptList;
+        let doctorList = this.data.doctorList;
         this.selectedList.map(value => {
-          deptList[value.i].selected = false;
+          doctorList[value.i].selected = false;
         });
-        data.deptList = deptList;
+        data.doctorList = doctorList;
         this.selectedList = [];
       }
       data.edit = !this.data.edit;
@@ -64,12 +49,12 @@ Page({
   },
 
   /**
-   * 选择科室
+   * 选择医生
    * @param {*} e 
    */
   selectEvent(e) {
     let { i, id } = e.currentTarget.dataset;
-    if (this.data.deptList[i].selected) {
+    if (this.data.doctorList[i].selected) {
       for (let i = 0; i < this.selectedList.length; i++) {
         if (this.selectedList[i].id == id) {
           this.selectedList.splice(i, 1);
@@ -80,12 +65,12 @@ Page({
       this.selectedList.push({ id, i });
     }
     this.setData({
-      [`deptList[${i}].selected`]: this.data.deptList[i].selected ? false : true,
+      [`doctorList[${i}].selected`]: this.data.doctorList[i].selected ? false : true,
     });
   },
 
   /**
-   * 删除科室
+   * 删除医生
    */
   deleteEvent() {
     let that = this;
@@ -108,7 +93,7 @@ Page({
               }
             });
             RESTful.request({
-              url: API.dept_delete,
+              url: API.doctor_delete,
               data: {
                 ids
               },
@@ -117,7 +102,7 @@ Page({
               wx.hideLoading();
               if (res.data.status == 0) {
                 that.selectedList = [];
-                that.getDeptList();
+                that.getDoctorList();
                 that.setData({
                   edit: false
                 });
@@ -138,17 +123,17 @@ Page({
       })
     } else {
       wx.showToast({
-        title: '请先选择需要删除的医院',
+        title: '请先选择需要删除的医生',
         icon: 'none'
       });
     }
   },
 
   /**
-   * 获取科室列表
+   * 获取医生列表
    * @param {*} t 
    */
-  getDeptList(t = 1) {
+  getDoctorList(t = 1) {
     let p = 1;
     if (t) {
       this.setData({
@@ -156,9 +141,9 @@ Page({
       });
     }
     RESTful.request({
-      url: API.dept_list,
+      url: API.doctor_list,
       data: {
-        hospitalId: this.options.id,
+        departmentId: this.options.id,
         p,
         page_size: 10
       }
@@ -179,7 +164,7 @@ Page({
           if (this.data.noMoreData) {
             data.noMoreData = false;
           }
-          data.deptList = newArr;
+          data.doctorList = newArr;
         } else {
           data.noData = true;
         }
@@ -190,17 +175,17 @@ Page({
   },
 
   /**
-   * 获取更多科室列表
+   * 获取更多医院列表
    */
-  getMoreDeptList() {
+  getMoreDoctorList() {
     let p = this.data.p + 1;
     this.setData({
       loadMore: true
     });
     RESTful.request({
-      url: API.dept_list,
+      url: API.doctor_list,
       data: {
-        hospitalId: this.options.id,
+        departmentId: this.options.id,
         p,
         page_size: 10
       }
@@ -212,7 +197,7 @@ Page({
       if (res.data.status == 0) {
         let newArr = res.data.data;
         if (newArr.length > 0) {
-          data.deptList = this.data.deptList.concat(newArr);
+          data.doctorList = this.data.doctorList.concat(newArr);
           data.p = p;
         } else {
           data.noMoreData = true;
@@ -227,7 +212,7 @@ Page({
    */
   enterSearch() {
     wx.navigateTo({
-      url: '/admin/search/search?tag=dept'
+      url: '/admin/search/search?tag=doctor'
     });
   },
 
@@ -235,12 +220,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if (options.tag) {
-      this.setData({
-        tag: options.tag
-      });
-    }
-    this.getDeptList();
+    this.getDoctorList();
   },
 
   /**
@@ -254,9 +234,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if (app.globalData.deptInit) {
-      app.globalData.deptInit = false;
-      this.getDeptList();
+    if (app.globalData.doctorInit) {
+      app.globalData.doctorInit = false;
+      this.getDoctorList();
     }
   },
 
@@ -281,7 +261,7 @@ Page({
     if (this.data.edit) {
       this.editEvent();
     }
-    this.getDeptList(0);
+    this.getDoctorList(0);
   },
 
   /**
@@ -289,7 +269,7 @@ Page({
    */
   onReachBottom: function () {
     if (!(this.data.noData || this.data.noMoreData || this.data.edit)) {
-      this.getMoreDeptList();
+      this.getMoreDoctorList();
     }
   },
 

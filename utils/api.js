@@ -16,6 +16,12 @@ const API = {
     // 获取用户信息
     get_userinfo: HOST + '/get_userinfo',
 
+    // 更新用户信息
+    update_userinfo: HOST + '/update_userinfo',
+
+    // 查询余额
+    check_balance: HOST + '/check_balance',
+
     // 医院
     hosp: HOST + "/hospital",
 

@@ -19,6 +19,8 @@
         <template is="no-more-data" data="{{loadMore}}"></template>
       </block>
     </block>
-    <template is="bottom-button" data="{{edit, navUrl}}"></template>
+    <block wx:if="{{!tag}}">
+      <template is="bottom-button" data="{{edit}}"></template>
+    </block>
   </view>
 </block>

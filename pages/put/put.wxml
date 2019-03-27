@@ -38,7 +38,7 @@
                         <view class="item" bindtap="itemTap"><block wx:if="{{length&&length>index}}">●</block></view>
                     </block>
                 </view>
-                <input class="input" type="number" focus="{{focus}}" maxlength="{{6}}" data-tag="{{2}}" bindinput="input" />
+                <input class="input" value="{{password}}" type="number" focus="{{focus}}" maxlength="{{6}}" data-tag="{{2}}" bindinput="input" />
             </view>
         </view>
     </view>

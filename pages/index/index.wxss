@@ -12,12 +12,12 @@
 .location .city {
   margin-right: 10rpx;
   font-size: 32rpx;
-  color: var(--colorOne);
+  color: #666;
 }
 
 .location .icon-xiajiantou {
   font-size: 32rpx;
-  color: var(--colorOne);
+  color: #666;
 }
 
 .search {
@@ -31,11 +31,11 @@
 
 .search .icon-search {
   font-size: 38rpx;
-  color: var(--colorOne);
+  color: #666;
 }
 
 .search .text {
   margin-left: 10rpx;
   font-size: var(--fontSizeOne);
-  color: var(--colorOne);
+  color: #666;
 }

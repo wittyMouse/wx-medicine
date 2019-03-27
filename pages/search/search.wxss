@@ -43,6 +43,12 @@
     color: #666;
 }
 
+.header .search-row .search-btn {
+    font-size: 32rpx;
+    color: var(--backgroundColorOne);
+    line-height: 1;
+}
+
 .header .search-row .cancal {
     font-size: 32rpx;
     color: #666;

@@ -1,17 +1,18 @@
 <template name="hosp-list">
   <view class="hosp-list">
     <block wx:for="{{dataList}}" wx:key="index">
-      <view class="flex flex-y-center hosp-item" data-url="/admin/{{tag=='hosp'?'hosp/hosp_detail/hosp_detail':tag=='dept'?'dept/dept_list/dept_list':tag=='doctor'?'':''}}" data-id="{{item.hospitalId}}" data-i="{{index}}" bindtap="{{edit?'selectEvent':'jump'}}">
+      <view class="flex flex-y-center hosp-item" data-id="{{item.hospitalId}}" data-i="{{index}}" bindtap="{{edit?'selectEvent':'itemEvent'}}">
         <block wx:if="{{edit}}">
           <block wx:if="{{item.selected}}">
-            <view class="flex-0 iconfont icon-icon_selected_fill"></view>
+            <view class="flex-0 iconfont icon-all_selectm"></view>
           </block>
           <block wx:else>
-            <view class="flex-0 iconfont icon-icon_selected_no"></view>
+            <view class="flex-0 iconfont icon-all_noselectm"></view>
           </block>
         </block>
-        <image class="flex-0 hosp-logo" mode="" src="{{item.hospitalLogo}}" />
+        <image class="flex-0 hosp-logo" mode="aspectFill" src="{{item.hospitalLogo}}" />
         <view class="flex-1 hosp-name">{{item.hospitalName}}</view>
+        <view class="flex-0 iconfont icon-enter" hidden="{{tag}}"></view>
       </view>
     </block>
   </view>
@@ -20,17 +21,53 @@
 <template name="dept-list">
   <view class="dept-list">
     <block wx:for="{{dataList}}" wx:key="index">
-      <view class="flex flex-y-center dept-item" data-url="/admin/dept/dept_detail/dept_detail" data-id="{{item.hospitalId}}" data-i="{{index}}" bindtap="{{edit?'selectEvent':'jump'}}">
+      <view class="flex flex-y-center dept-item" data-id="{{item.departmentId}}" data-i="{{index}}" bindtap="{{edit?'selectEvent':'itemEvent'}}">
         <block wx:if="{{edit}}">
           <block wx:if="{{item.selected}}">
-            <view class="flex-0 iconfont icon-icon_selected_fill"></view>
+            <view class="flex-0 iconfont icon-all_selectm"></view>
           </block>
           <block wx:else>
-            <view class="flex-0 iconfont icon-icon_selected_no"></view>
+            <view class="flex-0 iconfont icon-all_noselectm"></view>
           </block>
         </block>
-        <image class="flex-0 hosp-logo" mode="" src="{{item.hospitalLogo}}" />
-        <view class="flex-1 hosp-name">{{item.hospitalName}}</view>
+        <view class="flex-1 dept-name">{{item.departmentName}}</view>
+        <view class="flex-0 iconfont icon-enter" hidden="{{tag}}"></view>
+      </view>
+      <view class="child-dept-list">
+        <block wx:for="{{item.childList}}" wx:for-item="childItem" wx:for-index="idx" wx:key="idx">
+          <view class="flex flex-y-center child-dept-item" data-tag="child" data-id="{{childItem.departmentId}}" data-i="{{idx}}" bindtap="{{edit?'selectEvent':'itemEvent'}}">
+            <block wx:if="{{edit}}">
+              <block wx:if="{{childItem.selected}}">
+                <view class="flex-0 iconfont icon-all_selectm"></view>
+              </block>
+              <block wx:else>
+                <view class="flex-0 iconfont icon-all_noselectm"></view>
+              </block>
+            </block>
+            <view class="flex-1 child-dept-name">{{childItem.departmentName}}</view>
+            <view class="flex-0 iconfont icon-enter" hidden="{{tag}}"></view>
+          </view>
+        </block>
+      </view>
+    </block>
+  </view>
+</template>
+
+<template name="doctor-list">
+  <view class="doctor-list">
+    <block wx:for="{{dataList}}" wx:key="index">
+      <view class="flex flex-y-center doctor-item" data-id="{{item.doctorId}}" data-i="{{index}}" bindtap="{{edit?'selectEvent':'itemEvent'}}">
+        <block wx:if="{{edit}}">
+          <block wx:if="{{item.selected}}">
+            <view class="flex-0 iconfont icon-all_selectm"></view>
+          </block>
+          <block wx:else>
+            <view class="flex-0 iconfont icon-all_noselectm"></view>
+          </block>
+        </block>
+        <image class="flex-0 doctor-avatar" mode="aspectFill" src="{{item.doctorAvatar}}" />
+        <view class="flex-1 doctor-name">{{item.doctorName}}</view>
+        <view class="flex-0 iconfont icon-enter" hidden="{{tag}}"></view>
       </view>
     </block>
   </view>
@@ -42,13 +79,13 @@
       <view class="flex flex-y-center user-item" data-url="/admin/user/user_detail/user_detail" data-id="{{item.openId}}" data-i="{{index}}" bindtap="{{edit?'selectEvent':'jump'}}">
         <block wx:if="{{edit}}">
           <block wx:if="{{item.selected}}">
-            <view class="flex-0 iconfont icon-icon_selected_fill"></view>
+            <view class="flex-0 iconfont icon-all_selectm"></view>
           </block>
           <block wx:else>
-            <view class="flex-0 iconfont icon-icon_selected_no"></view>
+            <view class="flex-0 iconfont icon-all_noselectm"></view>
           </block>
         </block>
-        <image class="flex-0 user-logo" mode="" src="{{item.avatarUrl}}" />
+        <image class="flex-0 user-logo" mode="aspectFill" src="{{item.avatarUrl}}" />
         <view class="flex-1 user-name">{{item.nickName}}</view>
       </view>
     </block>
@@ -61,13 +98,13 @@
         <view class="flex flex-y-center register-item" data-url="/admin/register/register_detail/register_detail" data-id="{{item.openId}}" data-i="{{index}}" bindtap="{{edit?'selectEvent':'jump'}}">
           <block wx:if="{{edit}}">
             <block wx:if="{{item.selected}}">
-              <view class="flex-0 iconfont icon-icon_selected_fill"></view>
+              <view class="flex-0 iconfont icon-all_selectm"></view>
             </block>
             <block wx:else>
-              <view class="flex-0 iconfont icon-icon_selected_no"></view>
+              <view class="flex-0 iconfont icon-all_noselectm"></view>
             </block>
           </block>
-          <image class="flex-0 register-logo" mode="" src="{{item.avatarUrl}}" />
+          <image class="flex-0 register-logo" mode="aspectFill" src="{{item.avatarUrl}}" />
           <view class="flex-1 register-name">{{item.nickName}}</view>
         </view>
       </block>
@@ -80,10 +117,10 @@
       <view class="flex flex-y-center patient-item" data-url="/pages/patient/patient_detail/patient_detail" data-id="{{item.patientId}}" data-index="{{index}}" bindtap="itemTap">
         <block wx:if="{{edit}}">
           <block wx:if="{{item.selected}}">
-            <view class="flex-0 iconfont icon-icon_selected_fill"></view>
+            <view class="flex-0 iconfont icon-all_selectm"></view>
           </block>
           <block wx:else>
-            <view class="flex-0 iconfont icon-icon_selected_no"></view>
+            <view class="flex-0 iconfont icon-all_noselectm"></view>
           </block>
         </block>
         <view class="flex-0 name">{{item.patientName}}</view>

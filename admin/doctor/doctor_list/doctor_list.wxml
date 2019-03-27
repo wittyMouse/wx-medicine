@@ -8,13 +8,13 @@
   <template is="loading"></template>
 </block>
 <block wx:else>
-  <view class="dept_list">
+  <view class="doctor_list">
     <block wx:if="{{noData}}">
       <template is="no-data"></template>
     </block>
     <block wx:else>
       <search-bar bindentersearch="enterSearch"></search-bar>
-      <template is="dept-list" data="{{dataList: deptList, edit, tag}}"></template>
+      <template is="doctor-list" data="{{dataList: doctorList, edit, tag}}"></template>
       <block wx:if="{{loadMore||noMoreData}}">
         <template is="no-more-data" data="{{loadMore}}"></template>
       </block>

@@ -1,5 +1,7 @@
+/* 医院列表样式 */
 .hosp-list {
-  
+  padding: 0 30rpx;
+  background-color: #fff;
 }
 
 .hosp-item {
@@ -15,10 +17,68 @@
 }
 
 .hosp-name {
+  font-size: 34rpx;
 }
 
-.hosp-item .icon-icon_selected_fill,
-.hosp-item .icon-icon_selected_no {
+.hosp-item .icon-all_selectm,
+.hosp-item .icon-all_noselectm {
+  margin-right: 30rpx;
+  color: var(--backgroundColorOne);
+}
+
+
+/* 部门列表样式 */
+.dept-list {
+  padding: 0 40rpx;
+  background-color: #fff;
+}
+
+.dept-item,
+.child-dept-item {
+  padding: 20rpx 30rpx;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.dept-name,
+.child-dept-name {
+  font-size: 34rpx;
+}
+
+.dept-item .icon-all_selectm,
+.dept-item .icon-all_noselectm,
+.child-dept-item .icon-all_selectm,
+.child-dept-item .icon-all_noselectm {
+  margin-right: 30rpx;
+  color: var(--backgroundColorOne);
+}
+
+.child-dept-list {
+  padding: 0 0 0 30rpx;
+}
+
+/* 医生列表样式 */
+.doctor-list {
+  padding: 0 30rpx;
+  background-color: #fff;
+}
+
+.doctor-item {
+  padding: 20rpx 30rpx;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.doctor-avatar {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  margin-right: 30rpx;
+}
+
+.doctor-name {
+}
+
+.doctor-item .icon-all_selectm,
+.doctor-item .icon-all_noselectm {
   margin-right: 30rpx;
   color: var(--backgroundColorOne);
 }
@@ -41,8 +101,8 @@
   margin-right: 30rpx;
 }
 
-.user-item .icon-icon_selected_fill,
-.user-item .icon-icon_selected_no {
+.user-item .icon-all_selectm,
+.user-item .icon-all_noselectm {
   margin-right: 30rpx;
   color: var(--backgroundColorOne);
 }
@@ -65,8 +125,8 @@
   margin-right: 30rpx;
 }
 
-.register-item .icon-icon_selected_fill,
-.register-item .icon-icon_selected_no {
+.register-item .icon-all_selectm,
+.register-item .icon-all_noselectm {
   margin-right: 30rpx;
   color: var(--backgroundColorOne);
 }
@@ -95,8 +155,8 @@
   font-size: 30rpx;
 }
 
-.patient-item .icon-icon_selected_fill,
-.patient-item .icon-icon_selected_no {
+.patient-item .icon-all_selectm,
+.patient-item .icon-all_noselectm {
   margin-right: 30rpx;
   color: var(--backgroundColorOne);
 }

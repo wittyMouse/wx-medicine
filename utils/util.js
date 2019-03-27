@@ -216,6 +216,33 @@ const get_userinfo = (app) => {
   }).catch(error => console.error(error));
 }
 
+const set_userinfo = (app, data) => {
+  wx.showLoading({
+    title: '登陆中...',
+    mask: true
+  });
+  let userInfo = data.userInfo,
+    temp = data;
+  temp.token = app.globalData.token;
+  temp.userInfo = JSON.stringify(temp.userInfo);
+  request({
+    url: API.set_userinfo,
+    data: temp,
+    method: 'POST'
+  }).then(res => {
+    // console.log(res);
+    wx.hideLoading();
+    if (res.data.status == 0) {
+      app.globalData.userInfo = userInfo;
+    } else {
+      wx.showToast({
+        title: '登录失败，请检查网络连接',
+        icon: 'none'
+      });
+    }
+  }).catch(error => console.error(error));
+}
+
 module.exports = {
   formatTime,
   formatNumber,
@@ -226,5 +253,6 @@ module.exports = {
   getLocation,
   login,
   request,
-  get_userinfo
+  get_userinfo,
+  set_userinfo
 }

@@ -1,3 +1,7 @@
+import { API } from '../../utils/api';
+const RESTful = require('../../utils/request');
+const app = getApp();
+
 Page({
     data: {
 
@@ -6,41 +10,27 @@ Page({
         let { tag } = e.currentTarget.dataset;
         if (tag == 1) {
             this.setData({
-                value: e.detail.value
+                money: e.detail.value
             });
         } else if (tag == 2) {
             this.setData({
-                money: e.detail.value,
+                password: e.detail.value,
                 length: e.detail.value.toString().length
             });
             if (e.detail.value.length == 6) {
-                wx.showLoading({
-                    title: '充值中...',
-                    mask: true
-                });
-                this.putRequest(() => {
-                    wx.hideLoading();
-                    wx.showToast({
-                        title: '充值成功',
-                        icon: 'none'
-                    });
-                    let id = setTimeout(() => {
-                        wx.navigateBack();
-                        clearTimeout(id);
-                    }, 1000);
-                });
+                this.putRequest();
             }
         }
     },
     put(e) {
-        if (!this.data.value || /^\.|^.+\..{3,}/.test(this.data.value)) {
+        if (!this.data.money || /^\.|^.+\..{3,}/.test(this.data.money)) {
             wx.showToast({
                 title: '请输入正确金额',
                 icon: 'none'
             });
             return;
         }
-        let valueStr = this.data.value,
+        let valueStr = this.data.money,
             idx = valueStr.indexOf('.');
         if (idx > -1) {
             if (idx == valueStr.length - 1) {
@@ -68,6 +58,8 @@ Page({
     },
     close() {
         this.setData({
+            password: '',
+            length: 0,
             showPop: false
         });
     },
@@ -76,7 +68,37 @@ Page({
             focus: true
         });
     },
-    putRequest(cb) {
-        cb && cb();
+    putRequest() {
+        wx.showLoading({
+            title: '充值中...',
+            mask: true
+        });
+        RESTful.request({
+            url: API.update_userinfo,
+            data: {
+                key: 'balance',
+                value: this.data.money,
+                tag: 'add',
+                token: app.globalData.token
+            },
+            method: "POST"
+        }).then(res => {
+            wx.hideLoading();
+            if (res.data.status == 0) {
+                wx.showToast({
+                    title: '充值成功'
+                });
+                let id = setTimeout(() => {
+                    wx.navigateBack();
+                    clearTimeout(id);
+                }, 1000);
+            } else {
+                wx.showToast({
+                    title: '充值失败',
+                    icon: 'none'
+                });
+            }
+            this.close();
+        }).catch(error => console.error(error));
     }
 })

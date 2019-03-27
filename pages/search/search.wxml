@@ -10,7 +10,7 @@
             <view class="flex flex-y-center header dept">
                 <view class="flex-1 flex flex-y-center search-row">
                     <view class="flex-0 iconfont icon-search" data-tag="dept" bindtap="searchHandle"></view>
-                    <input class="flex-1 input" value="{{keyword}}" placeholder="请输入科室名或医生名" placeholder-class="placeholder" maxlength="{{140}}" cursor-spacing="0" focus="{{focus}}" confirm-type="done" data-tag="dept" bindinput="inputHandle" bindfocus="focusHandle" bindblur="blurHandle" bindconfirm="confirmHandle" />
+                    <input class="flex-1 input" value="{{keyword}}" placeholder="请输入科室名或医生名" placeholder-class="placeholder" focus="{{true}}" confirm-type="search" data-tag="dept" bindinput="inputHandle" bindconfirm="confirmHandle" />
                     <block wx:if="{{keyword}}">
                         <view class="flex-0 iconfont icon-error" bindtap="reset"></view>
                     </block>
@@ -34,11 +34,16 @@
             <view class="header">
                 <view class="flex flex-y-center search-row">
                     <view class="flex-0 iconfont icon-search" data-tag="hosp" bindtap="searchHandle"></view>
-                    <input class="flex-1 input" value="{{keyword}}" placeholder="请输入医院名称" placeholder-class="placeholder" maxlength="{{140}}" cursor-spacing="0" focus="{{focus}}" confirm-type="done" data-tag="hosp" bindinput="inputHandle" bindfocus="focusHandle" bindblur="blurHandle" bindconfirm="confirmHandle" />
+                    <input class="flex-1 input" value="{{keyword}}" placeholder="请输入医院名称" placeholder-class="placeholder" focus="{{true}}" confirm-type="search" data-tag="hosp" bindinput="inputHandle" bindconfirm="confirmHandle" />
                     <block wx:if="{{keyword}}">
                         <view class="flex-0 iconfont icon-error" bindtap="reset"></view>
                     </block>
-                    <view class="flex-0 cancal" bindtap="cancal">取消</view>
+                    <block wx:if="{{keyword}}">
+                        <view class="flex-0 search-btn" data-tag="hosp" bindtap="confirmHandle">搜索</view>
+                    </block>
+                    <block wx:else>
+                        <view class="flex-0 cancal" bindtap="cancal">取消</view>
+                    </block>
                 </view>
             </view>
             <template is="hosp" data="{{hospList}}" />

@@ -1,13 +1,40 @@
-<view class="wallet">
-    <view class="header">
-        <view class="label">账户余额(元)</view>
-        <view class="balance">0.00</view>
-    </view>
-    <view class="container">
-        <view class="flex flex-y-center row" bindtap="jump">
-            <view class="flex-0 iconfont icon-image"></view>
-            <view class="flex-1 label">充值</view>
-            <view class="flex-0 iconfont icon-enter"></view>
+<import src="/tmpl/loading/loading.wxml" />
+
+<block wx:if="{{loading}}">
+    <template is="loading" />
+</block>
+<block wx:else>
+    <view class="wallet">
+        <view class="header">
+            <view class="label">账户余额(元)</view>
+            <view class="balance">{{wallet.moneyFormat(balance)}}</view>
+        </view>
+        <view class="container">
+            <view class="flex flex-y-center row" bindtap="jump">
+                <view class="flex-0 iconfont icon-image"></view>
+                <view class="flex-1 label">充值</view>
+                <view class="flex-0 iconfont icon-enter"></view>
+            </view>
         </view>
     </view>
-</view>
+</block>
+
+<wxs module="wallet">
+    var moneyFormat = function (num) {
+        var temp = num + '';
+        var index = temp.indexOf('.');
+        if (index > -1) {
+            if (index == temp.length - 1) {
+                temp += '00';
+            } else if (index == temp.length - 2) {
+                temp += '0';
+            } else {
+                temp = temp.substring(0, index + 3);
+            }
+        } else {
+            temp += '.00';
+        }
+        return temp;
+    };
+    module.exports.moneyFormat = moneyFormat;
+</wxs>

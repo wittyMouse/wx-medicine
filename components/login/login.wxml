@@ -1,0 +1,17 @@
+<block wx:if="{{showLogin}}">
+    <view class="login">
+        <view class="login-mask"></view>
+        <view class="card">
+            <view class="header">
+                <view class="title">医疗挂号平台</view>
+            </view>
+            <view class="container">
+                <view class="text">挂号需要获取用户信息</view>
+                <view class="text">请先登录</view>
+            </view>
+            <view class="footer">
+                <button class="no-button login-btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo">授权登录</button>
+            </view>
+        </view>
+    </view>
+</block>

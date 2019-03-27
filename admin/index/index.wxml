@@ -1,8 +1,8 @@
 <view class="admin-index">
-    <navigator class="admin-item" url="/admin/hosp/hosp_list/hosp_list?tag=hosp">医院管理</navigator>
-    <navigator class="admin-item" url="/admin/hosp/hosp_list/hosp_list?tag=dept">科室管理</navigator>
-    <navigator class="admin-item" url="/admin/hosp/hosp_list/hosp_list?tag=doctor">医生管理</navigator>
-    <navigator class="admin-item" url="/admin/register/register_list/register_list">排班管理</navigator>
-    <navigator class="admin-item" url="/admin/user/user_list/user_list">用户管理</navigator>
-    <navigator class="admin-item" url="/admin/register/register_list/register_list">挂号信息管理</navigator>
+    <view class="admin-item" data-url="/admin/hosp/hosp_list/hosp_list" bindtap="jump">医院管理</view>
+    <view class="admin-item" data-url="/admin/hosp/hosp_list/hosp_list?tag=dept" bindtap="jump">科室管理</view>
+    <view class="admin-item" data-url="/admin/hosp/hosp_list/hosp_list?tag=doctor" bindtap="jump">医生管理</view>
+    <view class="admin-item" data-url="/admin/hosp/hosp_list/hosp_list?tag=roster" bindtap="jump">排班管理</view>
+    <view class="admin-item" data-url="/admin/user/user_list/user_list" bindtap="jump">用户管理</view>
+    <view class="admin-item" data-url="/admin/register/register_list/register_list" bindtap="jump">挂号信息管理</view>
 </view>

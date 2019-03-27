@@ -5,7 +5,7 @@
 .wallet .header {
     padding: 80rpx 30rpx 40rpx;
     color: #fff;
-    background-color: #09bb07;
+    background-color: var(--backgroundColorOne);
 }
 
 .wallet .header .label {

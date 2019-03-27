@@ -29,12 +29,14 @@
         "hosp/hosp_detail/hosp_detail",
         "dept/dept_list/dept_list",
         "dept/dept_detail/dept_detail",
+        "doctor/doctor_list/doctor_list",
+        "doctor/doctor_detail/doctor_detail",
         "user/user_list/user_list",
         "user/user_detail/user_detail",
-        "register/register_list/register_list",
-        "register/register_detail/register_detail",
         "roster/roster_list/roster_list",
-        "roster/roster_detail/roster_detail"
+        "roster/roster_detail/roster_detail",
+        "register/register_list/register_list",
+        "register/register_detail/register_detail"
       ]
     }
   ],
@@ -50,14 +52,20 @@
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
+    "color": "#aaaaaa",
+    "selectedColor": "#4169e1",
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "医疗挂号"
+        "text": "医疗挂号",
+        "iconPath": "/assets/images/cross_fill.png",
+        "selectedIconPath": "/assets/images/cross_fill_selected.png"
       },
       {
         "pagePath": "pages/user/user",
-        "text": "个人中心"
+        "text": "个人中心",
+        "iconPath": "/assets/images/user.png",
+        "selectedIconPath": "/assets/images/user_selected.png"
       }
     ]
   }

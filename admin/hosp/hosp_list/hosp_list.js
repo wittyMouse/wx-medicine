@@ -9,33 +9,35 @@ Page({
    */
   data: {
     loading: true,
-    edit: false,
-    navUrl: '/admin/hosp/hosp_detail/hosp_detail'
+    edit: false
   },
   selectedList: [],
 
   /**
    * 跳转
-   * @param {*} e 
    */
-  jump(e) {
-    let url = "",
-      dataset = e.currentTarget.dataset;
-    for (let key in dataset) {
-      if (key == 'i') {
-        continue;
-      }
-      if (key == 'url') {
-        url = dataset[key] + url;
-      } else {
-        let temp = "";
-        if (url.search(/\?/g) > -1) {
-          temp = '&';
-        } else {
-          temp = '?';
-        }
-        url += temp + key + '=' + dataset[key];
-      }
+  jump() {
+    wx.navigateTo({
+      url: '/admin/hosp/hosp_detail/hosp_detail?tag=add'
+    });
+  },
+
+  itemEvent(e) {
+    let { id } = e.currentTarget.dataset;
+    let url = "";
+    switch(this.data.tag) {
+      case 'dept':
+        url = "/admin/dept/dept_list/dept_list?id=" + id;
+        break;
+      case 'doctor':
+        url = "/admin/dept/dept_list/dept_list?tag=doctor&id=" + id;
+        break;
+      case 'roster':
+        url = "/admin/dept/dept_list/dept_list?tag=roster&id=" + id;
+        break;
+      default:
+        url = "/admin/hosp/hosp_detail/hosp_detail?id=" + id;
+        break;
     }
     wx.navigateTo({
       url

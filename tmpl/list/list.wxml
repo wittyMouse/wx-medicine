@@ -5,11 +5,12 @@
                 <image mode="" class="flex-0 logo" mode="aspectFill" src="{{item.hospitalLogo}}" />
                 <view class="flex-1 info">
                     <view class="flex flex-y-center name">
-                        <view class="flex-0 tag">{{tag}}三甲</view>
-                        <view class="flex-1 line-1 txt">{{item.hospitalName||'南方医科大学南方医院'}}</view>
+                        <view class="flex-0 tag">{{list.dataFormat(item.level)}}</view>
+                        <view class="flex-1 line-1 txt">{{item.hospitalName}}</view>
                     </view>
-                    <view class="line-1 desc">{{desc}}特色科室：整形美容外科 肾内科 病理科 神经科</view>
-                    <view class="line-1 address">{{item.address||'16.4km | 广东省广州市广州大道北路1838号'}}</view>
+                    <view class="line-1 desc">{{item.introduction}}</view>
+                    <!-- <view class="line-1 address">{{item.distance}} | {{item.address}}</view> -->
+                    <view class="line-1 address">{{item.address}}</view>
                 </view>
             </view>
         </block>
@@ -49,3 +50,10 @@
         </block>
     </view>
 </template>
+
+<wxs module="list">
+    var dataFormat = function (str) {
+        return str[0] + str[2];
+    };
+    module.exports.dataFormat = dataFormat;
+</wxs>

@@ -1,13 +1,11 @@
-const app = getApp();
+import { API } from '../../utils/api';
+const RESTful = require('../../utils/request');
+let app = getApp();
 
 Page({
     data: {
         loading: false,
-        focus: true,
-        keyword: '',
-        hospList: 2,
-        deptList: 2,
-        doctorList: 2
+        keyword: ''
     },
     /**
      * 点击搜索图标
@@ -22,22 +20,6 @@ Page({
     inputHandle(e) {
         this.setData({
             keyword: e.detail.value
-        });
-    },
-    /**
-     * 输入框聚焦事件
-     */
-    focusHandle(e) {
-        this.setData({
-            focus: true
-        });
-    },
-    /**
-     * 输入框失去焦点事件
-     */
-    blurHandle(e) {
-        this.setData({
-            focus: false
         });
     },
     /**
@@ -66,8 +48,27 @@ Page({
     /**
      * 搜索医院
      */
-    hopsSearch(keyword) {
-
+    hopsSearch() {
+        RESTful.request({
+            url: API.hosp_list,
+            data: {
+                address: this.options.city,
+                keyword: this.data.keyword
+            }
+        }).then(res => {
+            // console.log(res);
+            let newArr = res.data.data,
+                data = {};
+            if (newArr.length > 0) {
+                if (this.data.noData) {
+                    data.noData = false;
+                }
+                data.hospList = newArr;
+            } else {
+                data.noData = true;
+            }
+            this.setData(data);
+        }).catch(error => console.error(error));
     },
     /**
      * 清空输入框
@@ -91,7 +92,7 @@ Page({
         let { tag } = e.currentTarget.dataset;
         if (tag == 'hosp') {
             wx.navigateTo({
-                url: '/pages/dept/dept?id=' + e.currentTarget.dataset.i
+                url: '/pages/dept/dept?id=' + e.currentTarget.dataset.id
             });
         }
     },
@@ -146,12 +147,11 @@ Page({
                 dept: true
             });
         }
-        this.loadData();
     },
-    /**
-     * 上拉触底事件
-     */
-    onReachBottom() {
-        this.loadMoreData();
-    }
+    // /**
+    //  * 上拉触底事件
+    //  */
+    // onReachBottom() {
+    //     this.loadMoreData();
+    // }
 })
