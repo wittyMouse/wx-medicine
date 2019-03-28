@@ -5,6 +5,8 @@
 </block>
 <block wx:else>
     <view class="note">
-
+        <tab tabList="{{tabList}}" bindtabchange="tabChange"></tab>
+        <scroll-view class="" style="height: {{scrollHeight}}px;" scroll-y scroll-with-animation bindscrolltolower="scrollToLower">
+        </scroll-view>
     </view>
 </block>

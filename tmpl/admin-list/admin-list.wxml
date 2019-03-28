@@ -12,7 +12,7 @@
         </block>
         <image class="flex-0 hosp-logo" mode="aspectFill" src="{{item.hospitalLogo}}" />
         <view class="flex-1 hosp-name">{{item.hospitalName}}</view>
-        <view class="flex-0 iconfont icon-enter" hidden="{{tag}}"></view>
+        <view class="flex-0 iconfont icon-enter" hidden="{{edit}}"></view>
       </view>
     </block>
   </view>
@@ -31,7 +31,7 @@
           </block>
         </block>
         <view class="flex-1 dept-name">{{item.departmentName}}</view>
-        <view class="flex-0 iconfont icon-enter" hidden="{{tag}}"></view>
+        <view class="flex-0 iconfont icon-enter" hidden="{{tag||edit}}"></view>
       </view>
       <view class="child-dept-list">
         <block wx:for="{{item.childList}}" wx:for-item="childItem" wx:for-index="idx" wx:key="idx">
@@ -45,7 +45,7 @@
               </block>
             </block>
             <view class="flex-1 child-dept-name">{{childItem.departmentName}}</view>
-            <view class="flex-0 iconfont icon-enter" hidden="{{tag}}"></view>
+            <view class="flex-0 iconfont icon-enter" hidden="{{edit}}"></view>
           </view>
         </block>
       </view>
@@ -67,7 +67,7 @@
         </block>
         <image class="flex-0 doctor-avatar" mode="aspectFill" src="{{item.doctorAvatar}}" />
         <view class="flex-1 doctor-name">{{item.doctorName}}</view>
-        <view class="flex-0 iconfont icon-enter" hidden="{{tag}}"></view>
+        <view class="flex-0 iconfont icon-enter" hidden="{{tag||edit}}"></view>
       </view>
     </block>
   </view>
@@ -114,7 +114,7 @@
 <template name="patient-list">
   <view class="patient-list">
     <block wx:for="{{dataList}}" wx:key="index">
-      <view class="flex flex-y-center patient-item" data-url="/pages/patient/patient_detail/patient_detail" data-id="{{item.patientId}}" data-index="{{index}}" bindtap="itemTap">
+      <view class="flex flex-y-center patient-item" data-id="{{item.patientId}}" data-i="{{index}}" bindtap="{{edit?'selectEvent':'itemEvent'}}">
         <block wx:if="{{edit}}">
           <block wx:if="{{item.selected}}">
             <view class="flex-0 iconfont icon-all_selectm"></view>

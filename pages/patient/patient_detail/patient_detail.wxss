@@ -1,0 +1,42 @@
+.patient-detail {
+
+}
+
+.patient-detail .row {
+    padding: 30rpx;
+    background-color: #fff;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.patient-detail .row .label {
+    width: 140rpx;
+    font-size: 34rpx;
+}
+
+.placeholder {
+    font-size: 34rpx;
+}
+
+.patient-detail .row .input {
+    font-size: 34rpx;
+}
+
+.patient-detail .row .icon-location {
+    margin-left: 30rpx;
+    color: var(--backgroundColorOne);
+}
+
+.patient-detail .row .radio-group {
+}
+
+.patient-detail .row .radio-group .radio {
+    margin-right: 30rpx;
+    font-size: 34rpx;
+}
+
+.patient-detail .row .switch {
+}
+
+.patient-detail .button {
+    margin: 50rpx 30rpx 0;
+}

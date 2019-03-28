@@ -1,0 +1,33 @@
+@import "/assets/style/default.wxss";
+@import "/assets/iconfont/iconfont.wxss";
+
+.tab {
+
+}
+
+.tab-header {
+    position: relative;
+    background-color: #fff;
+}
+
+.tab-item {
+    height: 100rpx;
+    font-size: 32rpx;
+    text-align: center;
+    line-height: 100rpx;
+}
+
+.tab-item.color {
+    color: var(--backgroundColorOne);
+}
+
+.tab-status {
+    position: absolute;
+    left: 0;
+    bottom: 10rpx;
+    z-index: 1;
+    width: 40rpx;
+    height: 6rpx;
+    background-color: var(--backgroundColorOne);
+    transition: all 400ms ease 0s;
+}

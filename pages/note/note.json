@@ -1,1 +1,6 @@
-{}
+{
+    "navigationBarTitleText": "挂号记录",
+    "usingComponents": {
+        "tab": "/components/tab/tab"
+    }
+}

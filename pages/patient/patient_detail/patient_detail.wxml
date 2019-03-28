@@ -1,41 +1,44 @@
 <import src="/tmpl/loading/loading.wxml" />
 
-<block wx:if="{{loading}}">
-    <template is="loading"></template>
-</block>
-<block wx:else>
-    <view class="patient-detail">
-        <view class="row">
-            <view class="label">就诊人编号</view>
-            <view class="value">{{patientDetail.patientId}}</view>
+<view class="patient-detail">
+    <block wx:if="{{loading}}">
+        <template is="loading"></template>
+    </block>
+    <block wx:else>
+        <view class="flex flex-y-center row">
+            <view class="flex-0 label">姓名</view>
+            <input class="flex-1 input" value="{{patientDetail.patientName}}" placeholder-class="placeholder" placeholder="请输入就诊人姓名" data-label="patientName" bindinput="input"/>
         </view>
-        <!-- <view class="row">
-            <view class="label">所属用户编号</view>
-            <view class="value">{{patientDetail.openId}}</view>
-        </view> -->
-        <view class="row">
-            <view class="label">就诊人姓名</view>
-            <view class="value">{{patientDetail.patientName}}</view>
+        <view class="flex flex-y-center row">
+            <view class="flex-0 label">性别</view>
+            <radio-group class="flex-1 radio-group" data-tag="radio" data-label="gender" bindchange="change">
+                <label class="radio">
+                    <radio value="1" checked="{{patientDetail.gender == 1}}" color="#4169e1" />男
+                </label>
+                <label class="radio">
+                    <radio value="2" checked="{{patientDetail.gender == 2}}" color="#4169e1" />女
+                </label>
+            </radio-group>
         </view>
-        <view class="row">
-            <view class="label">性别</view>
-            <view class="value">{{patientDetail.gender}}</view>
+        <view class="flex flex-y-center row">
+            <view class="flex-0 label">证件号</view>
+            <input class="flex-1 input" value="{{patientDetail.idCard}}" placeholder-class="placeholder" placeholder="请输入证件号" data-label="idCard" bindinput="input"/>
         </view>
-        <view class="row">
-            <view class="label">证件号</view>
-            <view class="value">{{patientDetail.idCard}}</view>
+        <view class="flex flex-y-center row">
+            <view class="flex-0 label">手机号</view>
+            <input class="flex-1 input" value="{{patientDetail.phoneNumber}}" placeholder-class="placeholder" placeholder="请输入手机号" data-label="phoneNumber" bindinput="input"/>
         </view>
-        <view class="row">
-            <view class="label">手机号码</view>
-            <view class="value">{{patientDetail.phoneNumber}}</view>
+        <view class="flex flex-y-center row">
+            <view class="flex-0 label">地址</view>
+            <input class="flex-1 input" value="{{tag?address:patientDetail.address}}" placeholder-class="placeholder" placeholder="请输入地址" data-label="address" bindinput="input"/>
+            <view class="flex-0 iconfont icon-location" data-label="address" bindtap="chooseLocation"></view>
         </view>
-        <view class="row">
-            <view class="label">地址</view>
-            <view class="value">{{patientDetail.address}}</view>
+        <view class="flex flex-y-center row">
+            <view class="flex-1 label">默认</view>
+            <view class="flex-0 switch">
+                <switch checked="{{patientDetail.isDefault}}" color="#4169e1" data-tag="switch" data-label="isDefault" bindchange="change"></switch>
+            </view>
         </view>
-        <view class="row">
-            <view class="label">默认就诊人</view>
-            <view class="value">{{patientDetail.isDefault}}</view>
-        </view>
-    </view>
-</block>
+        <button class="no-button button" bindtap="buttonEvent">{{tag?'确认':'更新'}}</button>
+    </block>
+</view>

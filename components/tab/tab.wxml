@@ -1,0 +1,8 @@
+<view class="tab">
+    <view class="flex flex-y-center tab-header">
+        <block wx:for="{{tabList}}" wx:key="index">
+            <view class="tab-item {{index==currentIndex?'color':''}}" style="width: {{100/tabList.length}}%;" data-index="{{index}}" bindtap="tabChange">{{item.name}}</view>
+            <view class="tab-status" style="transform: translate3d({{statusPos+'px'}}, 0, 0);"></view>
+        </block>
+    </view>
+</view>

@@ -6,7 +6,7 @@ Page({
   data: {
     loading: true,
     edit: false,
-    navUrl: '/pages/patient/patient_detail/patient_detail'
+    navUrl: ''
   },
   selectedList: [],
 
@@ -14,40 +14,24 @@ Page({
    * 项目点击事件
    * @param {*} e 
    */
-  itemTap(e) {
+  itemEvent(e) {
+    let { id } = e.currentTarget.dataset;
     if (this.options.tag == 'select') {
-      app.globalData.patientId = e.currentTarget.dataset.id;
+      app.globalData.patientId = id;
       wx.navigateBack();
     } else {
-      this.data.edit ? this.selectEvent(e) : this.jump(e);
+      wx.navigateTo({
+        url: "/pages/patient/patient_detail/patient_detail?id=" + id
+      });
     }
   },
 
   /**
    * 跳转
-   * @param {*} e 
    */
   jump(e) {
-    let url = "",
-      dataset = e.currentTarget.dataset;
-    for (let key in dataset) {
-      if (key == 'i') {
-        continue;
-      }
-      if (key == 'url') {
-        url = dataset[key] + url;
-      } else {
-        let temp = "";
-        if (url.search(/\?/g) > -1) {
-          temp = '&';
-        } else {
-          temp = '?';
-        }
-        url += temp + key + '=' + dataset[key];
-      }
-    }
     wx.navigateTo({
-      url
+      url: "/pages/patient/patient_detail/patient_detail?tag=add"
     });
   },
 
@@ -60,7 +44,7 @@ Page({
       if (this.data.edit && this.selectedList.length > 0) {
         let patientList = this.data.patientList;
         this.selectedList.forEach(item => {
-          patientList[item.index].selected = false;
+          patientList[item.i].selected = false;
         });
         data.patientList = patientList;
         this.selectedList = [];
@@ -75,8 +59,8 @@ Page({
    * @param {*} e 
    */
   selectEvent(e) {
-    let { id, index } = e.currentTarget.dataset;
-    if (this.data.patientList[index].selected) {
+    let { id, i } = e.currentTarget.dataset;
+    if (this.data.patientList[i].selected) {
       for (let i = 0; i < this.selectedList.length; i++) {
         if (this.selectedList[i].id == id) {
           this.selectedList.splice(i, 1);
@@ -84,10 +68,10 @@ Page({
         }
       }
     } else {
-      this.selectedList.push({ id, index });
+      this.selectedList.push({ id, i });
     }
     this.setData({
-      [`patientList[${index}].selected`]: this.data.patientList[index].selected ? false : true,
+      [`patientList[${i}].selected`]: this.data.patientList[i].selected ? false : true,
     });
   },
 
@@ -96,7 +80,7 @@ Page({
    */
   deleteEvent() {
     let that = this;
-    if (that.selectedList.length > 0) {
+    if (this.selectedList.length > 0) {
       wx.showModal({
         title: '提示',
         content: '是否删除选中的项目？',
@@ -136,9 +120,9 @@ Page({
     }).then(res => {
       wx.hideLoading();
       if (res.data.status == 0) {
-        that.selectedList = [];
-        that.getPatientList();
-        that.setData({
+        this.selectedList = [];
+        this.getPatientList();
+        this.setData({
           edit: false
         });
         wx.showToast({
@@ -180,5 +164,12 @@ Page({
   onLoad(options) {
     this.setData(options);
     this.getPatientList();
+  },
+
+  onShow() {
+    if (app.globalData.patientInit) {
+      app.globalData.patientInit = false;
+      this.getPatientList();
+    }
   }
 })

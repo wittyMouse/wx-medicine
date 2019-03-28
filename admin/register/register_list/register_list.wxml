@@ -14,6 +14,15 @@
     </block>
     <block>
       <search-bar bindentersearch="enterSearch"></search-bar>
+      <view class="tab">
+        <view class="">待支付</view>
+        <view class="">待就诊</view>
+        <view class="">已就诊</view>
+        <view class="">售后/退款</view>
+      </view>
+      <view class="">
+
+      </view>
       <template is="register-list" data="{{dataList: registerList, edit}}"></template>
       <block wx:if="{{loadMore||noMoreData}}">
         <template is="no-more-data" data="{{loadMore}}"></template>

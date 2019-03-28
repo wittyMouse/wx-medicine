@@ -1,5 +1,5 @@
 {
-    "navigationBarTitleText": "科室管理",
+    "navigationBarTitleText": "医生管理",
     "enablePullDownRefresh": true,
     "usingComponents": {
         "search-bar": "/components/search-bar/search-bar"
