@@ -13,9 +13,11 @@ Page({
 
   scrollItemTap(e) {
     console.log(e)
-    let { tag, index } = e.currentTarget.dataset;
+    let { tag, index } = e.currentTarget.dataset,
+      { currentIndex, currentChildIndex } = this.data.tmplData;
+    console.log(this.data.tmplData)
     if (tag) {
-      if (this.data.tmplData['currentChildIndex'] != index) {
+      if (currentChildIndex != index) {
         this.setData({
           'tmplData.currentChildIndex': index
         });
@@ -23,10 +25,10 @@ Page({
 
       }
       wx.navigateTo({
-        url: '/pages/doctor/doctor?id=' + this.data.tmplData.list[index].departmentId
+        url: '/pages/doctor/doctor?id=' + this.data.tmplData.list[currentChildIndex].childList[index].departmentId
       });
     } else {
-      if (this.data.tmplData['currentIndex'] != index) {
+      if (currentIndex != index) {
         this.setData({
           'tmplData.currentIndex': index
         });

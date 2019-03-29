@@ -3,7 +3,7 @@
         <image class="flex-0 image" mode="aspectFill" src="{{doctorDetail.doctorAvatar}}" />
         <view class="flex-1 row">
             <view class="text name">{{doctorDetail.doctorName}}</view>
-            <view class="text remarks">{{doctorDetail.introduction}}</view>
+            <view class="text remarks">{{doctorDetail.technicalTitle}}</view>
         </view>
     </view>
     <search-bar currentWeek="{{week}}" currentDate="{{date}}" binddatebarheight="getDateBarHeight" bindchange="changeEvent"></search-bar>

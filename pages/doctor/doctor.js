@@ -130,7 +130,7 @@ Page({
     RESTful.request({
       url: API.doctor_list,
       data: {
-
+        departmentId: this.options.id
       }
     }).then(res => {
       console.log(res);

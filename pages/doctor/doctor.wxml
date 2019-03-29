@@ -46,7 +46,18 @@
         </scroll-view>
       </block>
       <block wx:else>
-        <view class=""></view>
+        <scroll-view class="doctor-list" scroll-y scroll-with-animation style="height: {{scrollHeight}}px;">
+          <block wx:for="{{doctorList}}" wx:key="index">
+            <view class="flex flex-y-center doctor-item" data-id="{{item.doctorId}}" bindtap="jump">
+              <image class="flex-0 image" mode="aspectFill" src="{{item.doctorAvatar}}" />
+              <view class="flex-1 row">
+                <view class="text name">{{item.doctorName}}</view>
+                <view class="text remarks">{{item.technicalTitle}}</view>
+              </view>
+              <view class="flex-0 iconfont icon-enter"></view>
+            </view>
+          </block>
+        </scroll-view>
       </block>
     </view>
   </view>
