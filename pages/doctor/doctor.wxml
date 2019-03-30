@@ -17,7 +17,7 @@
     </view>
     <view class="tab-container">
       <block wx:if="{{0==currentIndex}}">
-        <view class="header">
+        <!-- <view class="header">
           <view class="flex week-row">
             <view class="flex-0 week-col iconfont icon-return" data-tag="last" bindtap="weekChange"></view>
             <view class="flex-1 week-col text">{{dateList[0].fullDate}}—{{dateList[6].fullDate}}</view>
@@ -25,30 +25,37 @@
           </view>
           <view class="flex date-list">
             <block wx:for="{{dateList}}" wx:key="index">
-              <view class="flex-1 flex flex-x-center flex-y-center date-item {{index==currentDate?'color':''}}" data-index="{{index}}" bindtap="dateChange">
+              <view class="flex-1 flex flex-x-center flex-y-center date-item {{index==currentDate?'color':''}}"
+                data-index="{{index}}" bindtap="dateChange">
                 <view class="text week">{{weekList[item.day]}}</view>
                 <view class="text date">{{item.date}}</view>
               </view>
             </block>
           </view>
-        </view>
-        <scroll-view class="doctor-list" scroll-y scroll-with-animation style="height: {{scrollHeight}}px;">
-          <block wx:for="{{rosterDoctorList}}" wx:key="index">
-            <view class="flex flex-y-center doctor-item" data-id="{{item.doctorId}}" bindtap="jump">
-              <image class="flex-0 image" mode="aspectFill" src="{{item.doctorAvatar}}" />
-              <view class="flex-1 row">
-                <view class="text name">{{item.doctorName}}</view>
-                <view class="text remarks">{{item.introduction}}</view>
+        </view> -->
+        <date-bar currentWeek="{{currentWeek}}" currentDate="{{currentDate}}" binddatebarheight="getDateBarHeight" bindchange="changeEvent"></date-bar>
+        <scroll-view class="doctor-list" scroll-y scroll-with-animation style="height: {{scrollHeight - dateBarHeight}}px;">
+          <block wx:if="{{rosterDoctorList.length > 0}}">
+            <block wx:for="{{rosterDoctorList}}" wx:key="index">
+              <view class="flex flex-y-center doctor-item" data-id="{{item.doctorId}}" bindtap="jump">
+                <image class="flex-0 image" mode="aspectFill" src="{{item.doctorAvatar}}" />
+                <view class="flex-1 row">
+                  <view class="text name">{{item.doctorName}}</view>
+                  <view class="text remarks">{{item.technicalTitle}}</view>
+                </view>
+                <view class="flex-0 iconfont icon-enter"></view>
               </view>
-              <view class="flex-0 iconfont icon-enter"></view>
-            </view>
+            </block>
+          </block>
+          <block wx:else>
+            <view style="padding: 50rpx 0 ; text-align: center;">当日无值班医生</view>
           </block>
         </scroll-view>
       </block>
       <block wx:else>
         <scroll-view class="doctor-list" scroll-y scroll-with-animation style="height: {{scrollHeight}}px;">
           <block wx:for="{{doctorList}}" wx:key="index">
-            <view class="flex flex-y-center doctor-item" data-id="{{item.doctorId}}" bindtap="jump">
+            <view class="flex flex-y-center doctor-item" data-tag="1" data-id="{{item.doctorId}}" bindtap="jump">
               <image class="flex-0 image" mode="aspectFill" src="{{item.doctorAvatar}}" />
               <view class="flex-1 row">
                 <view class="text name">{{item.doctorName}}</view>

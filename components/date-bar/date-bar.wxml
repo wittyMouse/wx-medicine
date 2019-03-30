@@ -1,8 +1,8 @@
 <view class="date-bar">
     <view class="flex week-row">
-        <view class="flex-0 week-col iconfont icon-return" data-tag="last" bindtap="weekChange"></view>
+        <!-- <view class="flex-0 week-col iconfont icon-return" data-tag="last" bindtap="weekChange"></view> -->
         <view class="flex-1 week-col text">{{dateList[0].fullDate}}—{{dateList[6].fullDate}}</view>
-        <view class="flex-0 week-col iconfont icon-enter" data-tag="next" bindtap="weekChange"></view>
+        <!-- <view class="flex-0 week-col iconfont icon-enter" data-tag="next" bindtap="weekChange"></view> -->
     </view>
     <view class="flex date-list">
         <block wx:for="{{dateList}}" wx:key="index">

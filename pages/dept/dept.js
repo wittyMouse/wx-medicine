@@ -12,30 +12,27 @@ Page({
   },
 
   scrollItemTap(e) {
-    console.log(e)
-    let { tag, index } = e.currentTarget.dataset,
-      { currentIndex, currentChildIndex } = this.data.tmplData;
-    console.log(this.data.tmplData)
-    if (tag) {
-      if (currentChildIndex != index) {
-        this.setData({
-          'tmplData.currentChildIndex': index
-        });
-      } else {
-
-      }
-      wx.navigateTo({
-        url: '/pages/doctor/doctor?id=' + this.data.tmplData.list[currentChildIndex].childList[index].departmentId
-      });
-    } else {
-      if (currentIndex != index) {
-        this.setData({
-          'tmplData.currentIndex': index
-        });
-      } else {
-
-      }
+    let { index } = e.currentTarget.dataset,
+      { currentIndex } = this.data.tmplData;
+    if (currentIndex == index) {
+      return;
     }
+    this.setData({
+      'tmplData.currentIndex': index
+    });
+  },
+
+  scrollChildItemTap(e) {
+    let { index } = e.currentTarget.dataset,
+      { currentIndex, currentChildIndex } = this.data.tmplData;
+    if (currentChildIndex != index) {
+      this.setData({
+        'tmplData.currentChildIndex': index
+      });
+    }
+    wx.navigateTo({
+      url: '/pages/doctor/doctor?id=' + this.data.tmplData.list[currentIndex].childList[index].departmentId
+    });
   },
 
   /**
@@ -108,7 +105,7 @@ Page({
     let that = this;
     wx.createSelectorQuery().select('.header').boundingClientRect((rect) => {
       that.setData({
-        'tmplData.panelHeight': app.globalData.sys.windowHeight - rect.height
+        'tmplData.panelHeight': wx.getSystemInfoSync().windowHeight - rect.height
       });
     }).exec();
   },

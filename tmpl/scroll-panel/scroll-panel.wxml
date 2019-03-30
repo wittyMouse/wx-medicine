@@ -10,7 +10,7 @@
         </scroll-view>
         <scroll-view scroll-y scroll-with-animation class="scroll-view bg-white">
             <block wx:for="{{list[currentIndex].childList}}" wx:key="index">
-                <view class="row" data-tag="child" data-index="{{index}}" bindtap="scrollItemTap">
+                <view class="row" data-index="{{index}}" bindtap="scrollChildItemTap">
                     <view class="col place {{index==currentChildIndex?'iconfont icon-youjiantou':''}}"></view>
                     <view class="line-1 col text">{{item.name}}</view>
                 </view>

@@ -1,5 +1,5 @@
 import { API } from '../../utils/api';
-import { rpxToPx } from '../../utils/util';
+import { formatTime, rpxToPx } from '../../utils/util';
 const RESTful = require('../../utils/request');
 const app = getApp();
 
@@ -8,10 +8,10 @@ Page({
     loading: false,
     tabList: [
       { name: '全部' },
-      { name: '待支付' },
+      // { name: '待支付' },
       { name: '待就诊' },
       { name: '已就诊' },
-      { name: '售后' }
+      // { name: '售后' }
     ],
     scrollHeight: app.globalData.sys.windowHeight - rpxToPx(100),
     type: 0
@@ -36,6 +36,16 @@ Page({
   },
 
   /**
+   * 
+   * @param {*} e 
+   */
+  // itemTap(e) {
+  //   wx.navigatorTo({
+  //     url: "/pages/note/note_detail/note_detail"
+  //   });
+  // },
+
+  /**
    * 获取挂号记录
    */
   getRegisterList(cb) {
@@ -49,7 +59,7 @@ Page({
       },
       method: "POST"
     }).then(res => {
-      console.log(res);
+      // console.log(res);
       cb && cb();
       let newArr = res.data.data,
         data = {
@@ -64,6 +74,9 @@ Page({
           if (this.data.noMoreData) {
             data.noMoreData = false;
           }
+          newArr.forEach(item => {
+            item.visitTime = formatTime(new Date(item.visitTime));
+          });
           data.registerList = newArr;
         } else {
           data.noData = true;

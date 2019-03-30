@@ -143,7 +143,7 @@ Page({
   getPatientList() {
     RESTful.request({
       url: API.patient_list,
-      date: {
+      data: {
         token: app.globalData.token,
       }
     }).then(res => {

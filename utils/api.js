@@ -72,9 +72,12 @@ const API = {
 
     // 排班医生
     roster_doctor: HOST + "/roster_doctor",
+    get_ticket: HOST + "/get_ticket",
     roster_doctor_list: HOST + "/roster_doctor_list",
     roster_doctor_delete: HOST + "/roster_doctor_delete",
 
+    // 挂号信息
+    register: HOST + "/register",
     // 获取挂号记录列表
     register_list: HOST + "/register_list",
 

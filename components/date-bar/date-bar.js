@@ -87,6 +87,13 @@ Component({
   lifetimes: {
     attached() {
       this.dateInit();
+    },
+    ready() {
+      let that = this;
+      wx.createSelectorQuery().in(this).select(".date-bar").boundingClientRect(rect => {
+        // console.log(rect);
+        that.triggerEvent('datebarheight', rect.height);
+      }).exec();
     }
   }
 })

@@ -5,7 +5,13 @@ const app = getApp();
 
 Page({
   data: {
-    scrollHeight: app.globalData.sys.windowHeight - rpxToPx(360) - 3
+    loading: true
+  },
+
+  getDateBarHeight(e) {
+    this.setData({
+      scrollHeight: wx.getSystemInfoSync().windowHeight - rpxToPx(160) - e.detail
+    });
   },
 
   /**
@@ -13,10 +19,13 @@ Page({
    * @param {*} e 
    */
   changeEvent(e) {
-    let { fullDate } = e.detail;
-    this.setData({
-      fullDate
-    });
+    this.setData(e.detail);
+    // if (this.options.tag) {
+    //   this.loadDataTag();
+    // } else {
+    //   this.loadData();
+    // }
+    this.loadData();
   },
 
   /**
@@ -50,13 +59,16 @@ Page({
    * 获取排班医生列表
    */
   getRosterDoctorList() {
-    let obj = this.getTimeObj();
+    // let obj = this.getTimeObj();
+    let data = {
+      doctorId: this.options.id
+    };
+    if (this.options.fullDate || this.data.currentDate > -1) {
+      data.date = this.data.currentDate;
+    }
     return RESTful.request({
-      url: API.roster_doctor_list,
-      data: {
-        doctorId: this.options.id,
-        ...obj
-      }
+      url: API.get_ticket,
+      data
     });
   },
 
@@ -100,7 +112,7 @@ Page({
 
       let timeList = res[1].data.data;
       let registerList = res[2].data.data;
-      
+
       data.timeList = [];
       timeList.forEach(item => {
         let beginDate = new Date(item.beginTime),
@@ -128,8 +140,73 @@ Page({
     }).catch(error => console.error(error));
   },
 
+  /**
+   * 获取数据
+   */
+  loadDataTag() {
+    let p1 = this.getDoctorDetail;
+    let p2 = this.getRosterDoctorList;
+    Promise.all([p1(), p2()]).then(res => {
+      // console.log(res)
+      let newList = res[1].data.data;
+      this.setData({
+        doctorDetail: res[0].data.data,
+        timeList: newList,
+        currentDate: new Date(newList[0].beginTime).getDay(),
+        fullDate: newList[0].beginTime
+      });
+
+      let obj = this.getTimeObj();
+      RESTful.request({
+        url: API.register_list,
+        data: {
+          doctorId: this.options.id,
+          ...obj
+        }
+      }).then(result => {
+        let timeList = this.data.timeList;
+        let registerList = result.data.data;
+
+        let temp = [];
+        timeList.forEach(item => {
+          let beginDate = new Date(item.beginTime),
+            endDate = new Date(item.endTime),
+            nowDate = new Date();
+          if (endDate > nowDate) {
+            while (beginDate < endDate) {
+              temp.push({
+                time: getFormatDate(beginDate, 'hh:mm'),
+                hidden: beginDate < nowDate,
+                registered: ((arr) => {
+                  for (let i = 0; i < arr.length; i++) {
+                    if (Date.parse(beginDate) == Date.parse(arr[i].visitTime)) {
+                      return true;
+                    }
+                  }
+                  return false;
+                })(registerList)
+              });
+              beginDate.setMinutes(beginDate.getMinutes() + 10);
+            }
+          }
+        });
+        this.setData({
+          loading: false,
+          timeList: temp
+        });
+      }).catch(error => console.error(error));
+    }).catch(error => console.error(error));
+  },
+
   onLoad(options) {
     this.setData(options);
-    this.loadData();
+  },
+
+  onShow() {
+    if (this.options.fullDate) {
+      this.loadData();
+    } else {
+      this.loadDataTag();      
+    }
   }
 })

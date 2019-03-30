@@ -1,0 +1,32 @@
+.note-list {
+
+}
+
+.note-list .note-item {
+    margin-top: 20rpx;
+    font-size: 30rpx;
+}
+
+.note-list .note-item .header {
+    padding: 30rpx;
+    background-color: #fafafa;
+}
+
+.note-list .note-item .container {
+    padding: 30rpx;
+    background-color: #fff;
+}
+
+.note-list .note-item .container .image {
+    width: 120rpx;
+    height: 150rpx;
+    margin-right: 30rpx;
+}
+
+.note-list .note-item .container .text-row {
+
+}
+
+.note-list .note-item .container .text {
+
+}

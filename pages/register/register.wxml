@@ -1,35 +1,70 @@
-<view class="register">
-    <view class="flex flex-y-center row">
-        <view class="flex-1 label">医生姓名</view>
-        <view class="flex-0 value">{{doctorDetail.doctorName}}</view>
-    </view>
-    <view class="flex flex-y-center row">
-        <view class="flex-1 label">就诊科室</view>
-        <view class="flex-0 value">{{doctorDetail.parentDepartmentName}} {{doctorDetail.departmentName}}</view>
-    </view>
-    <view class="flex flex-y-center row m-b">
-        <view class="flex-1 label">就诊时间</view>
-        <view class="flex-0 value">{{dateTime}}</view>
-    </view>
-    <view class="flex flex-y-center row m-b">
-        <view class="flex-1 label">挂号费</view>
-        <view class="flex-0 value">{{register.feeFormat(doctorDetail.fee)}}元</view>
-    </view>
-    <block wx:if="{{patientDetail}}">
+<import src="/tmpl/loading/loading.wxml" />
+
+<block wx:if="{{loading}}">
+    <template is="loading"></template>
+</block>
+<block wx:else>
+    <view class="register">
         <view class="flex flex-y-center row">
-            <view class="flex-0 name">{{patientDetail.patientName}}</view>
-            <view class="flex-1 id-card">{{register.numFormat(patientDetail.idCard)}}</view>
-            <view class="flex-0 iconfont icon-delete" bindtap="deletePatient"></view>
+            <view class="flex-1 label">医生姓名</view>
+            <view class="flex-0 value">{{doctorDetail.doctorName}}</view>
         </view>
-    </block>
-    <block wx:else>
-        <view class="flex flex-y-center row" bindtap="jump">
-            <view class="flex-1 label">选择就诊人</view>
-            <view class="flex-0 iconfont icon-enter"></view>
+        <view class="flex flex-y-center row">
+            <view class="flex-1 label">就诊科室</view>
+            <view class="flex-0 value">{{doctorDetail.parentDepartmentName}} {{doctorDetail.departmentName}}</view>
         </view>
-    </block>
-    <button class="no-button btn-confirm" bindtap="confirm">确认挂号</button>
-</view>
+        <view class="flex flex-y-center row m-b">
+            <view class="flex-1 label">就诊时间</view>
+            <view class="flex-0 value">{{dateTime}}</view>
+        </view>
+        <view class="flex flex-y-center row m-b">
+            <view class="flex-1 label">挂号费</view>
+            <view class="flex-0 value">{{register.feeFormat(doctorDetail.fee)}}元</view>
+        </view>
+        <block wx:if="{{patientDetail}}">
+            <view class="flex flex-y-center row">
+                <view class="flex-0 name">{{patientDetail.patientName}}</view>
+                <view class="flex-1 id-card">{{register.numFormat(patientDetail.idCard)}}</view>
+                <view class="flex-0 iconfont icon-delete" bindtap="deletePatient"></view>
+            </view>
+        </block>
+        <block wx:else>
+            <view class="flex flex-y-center row" bindtap="jump">
+                <view class="flex-1 label">选择就诊人</view>
+                <view class="flex-0 iconfont icon-enter"></view>
+            </view>
+        </block>
+        <button class="no-button btn-confirm" bindtap="confirm">确认挂号</button>
+    </view>
+
+    <view class="pop" wx:if="{{showPop}}">
+        <view class="card">
+            <view class="flex flex-y-center header">
+                <view class="iconfont icon-guanbi" bindtap="close"></view>
+                <image class="avatar" src="" />
+                <view class="note">请输入支付密码</view>
+            </view>
+            <view class="container">
+                <view class="label">余额</view>
+                <view class="flex flex-x-center value">
+                    <view class="unit">￥</view>
+                    <view class="text">{{valueStr}}</view>
+                </view>
+                <view class="input-wrapper">
+                    <view class="flex flex-y-center list">
+                        <block wx:for="{{6}}" wx:key="index">
+                            <view class="item" bindtap="itemTap">
+                                <block wx:if="{{length&&length>index}}">●</block>
+                            </view>
+                        </block>
+                    </view>
+                    <input class="input" value="{{password}}" type="number" focus="{{focus}}" maxlength="{{6}}"
+                        bindinput="input" bindblur="blur" />
+                </view>
+            </view>
+        </view>
+    </view>
+</block>
 
 <wxs module="register">
     var feeFormat = function (fee) {

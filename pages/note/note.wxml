@@ -6,7 +6,28 @@
 <block wx:else>
     <view class="note">
         <tab tabList="{{tabList}}" bindtabchange="tabChange"></tab>
-        <scroll-view class="" style="height: {{scrollHeight}}px;" scroll-y scroll-with-animation bindscrolltolower="scrollToLower">
+        <scroll-view class="scroll-view" style="height: {{scrollHeight}}px;" scroll-y scroll-with-animation
+            bindscrolltolower="scrollToLower">
+            <view class="note-list">
+                <block wx:for="{{registerList}}" wx:key="index">
+                    <view class="note-item" data-id="{{item.record_id}}" bindtap="itemTap">
+                        <view class="flex flex-y-center header">
+                            <view class="flex-1">就诊时间：{{item.visitTime}}</view>
+                            <view class="flex-0" style="color: var(--backgroundColorOne);">{{item.type==1?'待就诊':'已就诊'}}</view>
+                        </view>
+                        <view class="flex container">
+                            <image class="flex-0 image" mode="aspectFill" src="{{item.doctorAvatar}}" />
+                            <view class="flex-1 text-row">
+                                <view class="line-1 text">就诊人：{{item.patientName}}</view>
+                                <view class="line-1 text">就诊医院：{{item.hospitalName}}</view>
+                                <view class="line-1 text">就诊科室：{{item.departmentName}}</view>
+                                <view class="line-1 text">医生姓名：{{item.doctorName}}</view>
+                            </view>
+                        </view>
+                        <!-- <view class="footer"></view> -->
+                    </view>
+                </block>
+            </view>
         </scroll-view>
     </view>
 </block>

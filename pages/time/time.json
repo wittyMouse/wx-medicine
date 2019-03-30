@@ -1,6 +1,6 @@
 {
     "navigationBarTitleText": "选择时间",
     "usingComponents": {
-        "search-bar": "/components/date-bar/date-bar"
+        "date-bar": "/components/date-bar/date-bar"
     }
 }
