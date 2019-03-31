@@ -77,10 +77,10 @@ Page({
           newArr.forEach(item => {
             item.visitTime = formatTime(new Date(item.visitTime));
           });
-          data.registerList = newArr;
         } else {
           data.noData = true;
         }
+        data.registerList = newArr;
         this.setData(data);
       }
     }).catch(error => console.error(error));

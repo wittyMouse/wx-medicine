@@ -153,6 +153,9 @@ Page({
           loading: false
         };
       if (newArr.length > 0) {
+        if (this.data.noData) {
+          data.noData = false;
+        }
         data.patientList = newArr;
       } else {
         data.noData = true;

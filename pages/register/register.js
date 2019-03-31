@@ -121,7 +121,9 @@ Page({
         icon: 'none',
         success() {
           let id = setTimeout(() => {
-            wx.navigateTo("/pages/wallet/wallet");
+            wx.navigateTo({
+              url: "/pages/wallet/wallet"
+            });
             clearTimeout(id);
           }, 1000);
         }

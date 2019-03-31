@@ -25,6 +25,7 @@
                     <view class="flex-0 place {{item.registered?'':'iconfont icon-enter'}}"></view>
                 </view>
             </block>
+            <view style="padding: 50rpx 0; text-align: center;" hidden="{{timeList.length > 0}}">当天无号</view>
         </scroll-view>
     </view>
 </block>

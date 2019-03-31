@@ -27,6 +27,7 @@
                         <!-- <view class="footer"></view> -->
                     </view>
                 </block>
+                <view style="padding: 50rpx 0; text-align:center;" hidden="{{registerList.length > 0}}">暂无记录</view>
             </view>
         </scroll-view>
     </view>

@@ -1,8 +1,26 @@
 <view class="admin-index">
-    <view class="admin-item" data-url="/admin/hosp/hosp_list/hosp_list" bindtap="jump">医院管理</view>
-    <view class="admin-item" data-url="/admin/hosp/hosp_list/hosp_list?tag=dept" bindtap="jump">科室管理</view>
-    <view class="admin-item" data-url="/admin/hosp/hosp_list/hosp_list?tag=doctor" bindtap="jump">医生管理</view>
-    <view class="admin-item" data-url="/admin/hosp/hosp_list/hosp_list?tag=roster" bindtap="jump">排班管理</view>
-    <view class="admin-item" data-url="/admin/user/user_list/user_list" bindtap="jump">用户管理</view>
-    <view class="admin-item" data-url="/admin/register/register_list/register_list" bindtap="jump">挂号信息管理</view>
+    <view class="flex flex-t-center admin-item" data-url="/admin/hosp/hosp_list/hosp_list" bindtap="jump">
+        <view class="flex-1">医院管理</view>
+        <view class="flex-0 iconfont icon-enter"></view>
+    </view>
+    <view class="flex flex-t-center admin-item" data-url="/admin/hosp/hosp_list/hosp_list?tag=dept" bindtap="jump">
+        <view class="flex-1">科室管理</view>
+        <view class="flex-0 iconfont icon-enter"></view>
+    </view>
+    <view class="flex flex-t-center admin-item" data-url="/admin/hosp/hosp_list/hosp_list?tag=doctor" bindtap="jump">
+        <view class="flex-1">医生管理</view>
+        <view class="flex-0 iconfont icon-enter"></view>
+    </view>
+    <view class="flex flex-t-center admin-item" data-url="/admin/hosp/hosp_list/hosp_list?tag=roster" bindtap="jump">
+        <view class="flex-1">排班管理</view>
+        <view class="flex-0 iconfont icon-enter"></view>
+    </view>
+    <view class="flex flex-t-center admin-item" data-url="/admin/user/user_list/user_list" bindtap="jump">
+        <view class="flex-1">用户管理</view>
+        <view class="flex-0 iconfont icon-enter"></view>
+    </view>
+    <view class="flex flex-t-center admin-item" data-url="/admin/register/register_list/register_list" bindtap="jump">
+        <view class="flex-1">挂号信息管理</view>
+        <view class="flex-0 iconfont icon-enter"></view>
+    </view>
 </view>
