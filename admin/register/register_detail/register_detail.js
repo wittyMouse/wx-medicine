@@ -1,6 +1,5 @@
 import { API } from '../../../utils/api';
 const RESTful = require('../../../utils/request');
-import { formatTime } from '../../../utils/util';
 const app = getApp();
 
 Page({
@@ -11,85 +10,61 @@ Page({
   data: {
 
   },
-  params: {},
 
   /**
-   * 啥也不干
+   * 更新事件
    */
-  stop() {
-    return;
-  },
-
-  /**
-   * 数据格式化
-   * @param {*} data 
-   */
-  dataFormat(data) {
-    let temp = data;
-    temp.isAdminDir = temp.isAdmin == 1 ? '是' : '否';
-    temp.genderDir = temp.gender ? temp.gender == 1 ? '男' : '女' : '未知';
-    if (temp.language = 'en') {
-      temp.languageDir = '英文'
-    } else if (temp.language = 'zh_CN') {
-      temp.languageDir = '简体中文'
-    } else if (temp.language = 'zh_TW') {
-      temp.languageDir = '繁体中文'
-    }
-
-    temp.phoneNumber = temp.phoneNumber ? temp.phoneNumber : '未绑定';
-    temp.province = temp.province ? temp.province : '无';
-    temp.city = temp.city ? temp.city : '无';
-
-    temp.createTime = formatTime(new Date(temp.createTime));
-    return temp;
-  },
-
-  /**
-   * 获取用户详情
-   */
-  getUserDetail() {
+  updateEvent(e) {
     this.setData({
-      loading: true
+      checked: e.detail.value
     });
+    this.updateRegisterDetail();
+  },
+
+  /**
+   * 获取挂号记录详情
+   */
+  getRegisterDetail() {
     RESTful.show({
-      url: API.user,
+      url: API.register_detail,
       data: {
         id: this.options.id
       }
     }).then(res => {
-      // console.log(res);
-      let data = {
-        loading: false
-      };
+      console.log(res);
       if (res.data.status == 0) {
-        data.userDetail = this.dataFormat(res.data.data);
-      } else {
-        wx.showToast({
-          title: '该用户不存在',
-          icon: 'none',
-          complete() {
-            let id = setTimeout(() => {
-              wx.navigateBack();
-              clearTimeout(id);
-            }, 1000);
-          }
+        this.setData({
+          registerDetail: res.data.data,
+          checked: res.data.data.type == 1 ? false : true
         });
       }
-      this.setData(data);
-    }).catch(error => {
-      console.error(error);
-    })
+    }).catch(error => console.error(error));
   },
 
   /**
-   * 进入更新页面
-   * @param {*} e 
+   * 更新挂号记录详情
    */
-  updateEvent(e) {
-    let { label, name, value } = e.currentTarget.dataset;
-    wx.navigateTo({
-      url: `/admin/update/update?tag=user&id=${this.options.id}&label=${label}&name=${name}&value=${value}`
-    });
+  updateRegisterDetail() {
+    RESTful.update({
+      url: API.register,
+      data: {
+        id: this.options.id,
+        type: this.data.checked ? 2 : 1
+      }
+    }).then(res => {
+      // console.log(res);
+      if (res.data.status == 0) {
+        app.globalData.updateRegister = true;
+        wx.showToast({
+          title: res.data.msg
+        });
+      } else {
+        wx.showToast({
+          title: res.data.msg,
+          icon: 'none'
+        });
+      }
+    }).catch(error => console.error(error));
   },
 
   /**
@@ -97,7 +72,7 @@ Page({
    */
   onLoad: function (options) {
     if (options.id) {
-      this.getUserDetail();
+      this.getRegisterDetail();
     } else {
       wx.showToast({
         title: '参数不能为空',
@@ -117,16 +92,6 @@ Page({
    */
   onReady: function () {
 
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    if (this.options.id && app.globalData.userUpdate) {
-      app.globalData.userUpdate = false;
-      this.getUserDetail();
-    }
   },
 
   /**

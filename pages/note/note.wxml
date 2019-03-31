@@ -10,7 +10,7 @@
             bindscrolltolower="scrollToLower">
             <view class="note-list">
                 <block wx:for="{{registerList}}" wx:key="index">
-                    <view class="note-item" data-id="{{item.record_id}}" bindtap="itemTap">
+                    <view class="note-item" data-id="{{item.recordId}}" bindtap="itemTap">
                         <view class="flex flex-y-center header">
                             <view class="flex-1">就诊时间：{{item.visitTime}}</view>
                             <view class="flex-0" style="color: var(--backgroundColorOne);">{{item.type==1?'待就诊':'已就诊'}}</view>

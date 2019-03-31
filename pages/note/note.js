@@ -13,7 +13,7 @@ Page({
       { name: '已就诊' },
       // { name: '售后' }
     ],
-    scrollHeight: app.globalData.sys.windowHeight - rpxToPx(100),
+    scrollHeight: wx.getSystemInfoSync().windowHeight - rpxToPx(100),
     type: 0
   },
 

@@ -1,117 +1,20 @@
 import { API } from '../../../utils/api';
+import { formatTime, rpxToPx } from '../../../utils/util';
 const RESTful = require('../../../utils/request');
+const app = getApp();
 
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    loading: true
-  },
-  selectedList: [],
-
-  /**
-   * 跳转
-   * @param {*} e 
-   */
-  jump(e) {
-    let url = "",
-      dataset = e.currentTarget.dataset;
-    for (let key in dataset) {
-      if (key == 'i') {
-        continue;
-      }
-      if (key == 'url') {
-        url = dataset[key] + url;
-      } else {
-        let temp = "";
-        if (url.search(/\?/g) > -1) {
-          temp = '&';
-        } else {
-          temp = '?';
-        }
-        url += temp + key + '=' + dataset[key];
-      }
-    }
-    wx.navigateTo({
-      url
-    });
-  },
-
-  /**
-   * 获取用户列表
-   * @param {*} t 
-   */
-  getRegisterList(t = 1) {
-    if (t) {
-      this.setData({
-        loading: true
-      });
-    }
-    RESTful.request({
-      url: API.user_list,
-      data: {
-        p: 1,
-        page_size: 10
-      }
-    }).then(res => {
-      // console.log(res);
-      let data = {};
-      if (t) {
-        data.loading = false;
-      } else {
-        wx.stopPullDownRefresh();
-      }
-      if (res.data.status == 0) {
-        let newArr = res.data.data;
-        if (newArr.length > 0) {
-          if (this.data.noData) {
-            data.noData = false;
-          }
-          if (this.data.noMoreData) {
-            data.noMoreData = false;
-          }
-          data.userList = newArr;
-        } else {
-          data.noData = true;
-        }
-        data.p = 1;
-        this.setData(data);
-      }
-    }).catch(error => console.error(error));
-  },
-
-  /**
-   * 获取更多用户列表
-   */
-  getMoreRegisterList() {
-    let p = this.data.p + 1;
-    this.setData({
-      loadMore: true
-    });
-    RESTful.request({
-      url: API.user_list,
-      data: {
-        p,
-        page_size: 10
-      }
-    }).then(res => {
-      // console.log(res);
-      let data = {
-        loadMore: false
-      };
-      if (res.data.status == 0) {
-        let newArr = res.data.data;
-        if (newArr.length > 0) {
-          data.userList = this.data.userList.concat(newArr);
-          data.p = p;
-        } else {
-          data.noMoreData = true;
-        }
-        this.setData(data);
-      }
-    }).catch(error => console.error(error));
+    loading: false,
+    tabList: [
+      { name: '全部' },
+      // { name: '待支付' },
+      { name: '待就诊' },
+      { name: '已就诊' },
+      // { name: '售后' }
+    ],
+    scrollHeight: wx.getSystemInfoSync().windowHeight - rpxToPx(240),
+    type: 0
   },
 
   /**
@@ -124,60 +27,125 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面加载
+   * tab点击事件
+   * @param {*} e 
    */
-  onLoad: function (options) {
-    this.getRegisterList();
+  tabChange(e) {
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    });
+    this.setData({
+      type: e.detail,
+      p: 1
+    });
+    this.getRegisterList(() => {
+      wx.hideLoading();
+    });
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
+   * @param {*} e 
    */
-  onReady: function () {
-
+  itemTap(e) {
+    let { id } = e.currentTarget.dataset;
+    wx.navigateTo({
+      url: "/admin/register/register_detail/register_detail?id=" + id
+    });
   },
 
   /**
-   * 生命周期函数--监听页面显示
+   * 获取挂号记录
    */
-  onShow: function () {
-
+  getRegisterList(cb) {
+    RESTful.request({
+      url: API.register_record,
+      data: {
+        type: this.data.type,
+        p: 1,
+        page_size: 10
+      },
+      method: "POST"
+    }).then(res => {
+      // console.log(res);
+      cb && cb();
+      let newArr = res.data.data,
+        data = {
+          p: 1,
+          loading: false
+        };
+      if (res.data.status == 0) {
+        if (newArr.length > 0) {
+          if (this.data.noData) {
+            data.noData = false;
+          }
+          if (this.data.noMoreData) {
+            data.noMoreData = false;
+          }
+          newArr.forEach(item => {
+            item.visitTime = formatTime(new Date(item.visitTime));
+          });
+        } else {
+          data.noData = true;
+        }
+        data.registerList = newArr;
+        this.setData(data);
+      }
+    }).catch(error => console.error(error));
   },
 
   /**
-   * 生命周期函数--监听页面隐藏
+   * 获取更多挂号记录
    */
-  onHide: function () {
+  getMoreRegisterList() {
+    let p = this.data.p + 1;
+    this.setData({
+      loadMore: true
+    });
+    RESTful.request({
+      url: API.register_record,
+      data: {
+        type: this.data.type,
+        p,
+        page_size: 10
+      },
+      method: "POST"
+    }).then(res => {
+      console.log(res);
+      let newArr = res.data.data,
+        data = {
+          loadMore: false
+        };
+      if (res.data.status == 0) {
+        if (newArr.length > 0) {
+          data.registerList = this.data.registerList.concat(newArr);
+          data.p = p;
+        } else {
+          data.noMoreData = true;
+        }
+        this.setData(data);
+      }
 
+    }).catch(error => console.error(error));
   },
 
   /**
-   * 生命周期函数--监听页面卸载
+   * 滚动条滑到底部
    */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-    this.getRegisterList(0);
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
+  scrollToLower() {
     if (!(this.data.noData || this.data.noMoreData)) {
       this.getMoreRegisterList();
     }
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
+  onLoad() {
+    this.getRegisterList();
+  },
 
-  }
+  onShow() {
+    if (app.globalData.updateRegister) {
+      app.globalData.updateRegister = false;
+      this.getRegisterList();
+    }
+  },
 })

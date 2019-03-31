@@ -80,9 +80,10 @@ const API = {
     register: HOST + "/register",
     // 获取挂号记录列表
     register_list: HOST + "/register_list",
-
     // 获取个人挂号记录
-    register_record: HOST + '/register_record'
+    register_record: HOST + '/register_record',
+    // 获取挂号记录详情
+    register_detail: HOST + '/register_detail'
 };
 
 module.exports = {

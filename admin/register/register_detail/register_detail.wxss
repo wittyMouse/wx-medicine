@@ -1,7 +1,17 @@
-.hosp_detail {
-    padding: 0 30rpx;
+.register_detail {
+    background-color: #fff;
 }
 
-.hosp_detail .wrapper {
-    margin-bottom: 50rpx;
+.register_detail .row {
+    padding: 30rpx;
+    font-size: 32rpx;
+
+}
+
+.register_detail .label {
+    width: 180rpx;
+}
+
+.register_detail .value {
+
 }
